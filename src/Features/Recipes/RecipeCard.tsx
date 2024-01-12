@@ -14,7 +14,7 @@ export default function RecipeCard({ recipe }: Props) {
         title={recipe.recipeTitle}
         />
       <CardContent>
-        title = {recipe.recipeTitle}</CardContent>
+        {recipe.recipeTitle}</CardContent>
     </Card>
   );
 }
