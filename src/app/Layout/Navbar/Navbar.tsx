@@ -4,23 +4,25 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../../Logo/Logo";
 
 const nav = [
-  { title: "Accueil", path: "/Accueil" },
+  { title: "Accueil", path: "/accueil" },
   { title: "Recettes salées", path: "/recettes-salees" },
-  { title: "Recettes sucrées", path: "/Recettes-sucrées" },
-  { title: "Recettes P'tits Gônes", path: "/Recettes-P'tits-Gônes" },
-  { title: "Régimes spécifiques", path: "/Régimes-spécifiques" },
+  { title: "Recettes sucrées", path: "/recettes-sucrees" },
+  { title: "Recettes p'tits Gônes", path: "/recettes-ptits-gones" },
+  { title: "Régimes spécifiques", path: "/regimes-specifiques" },
 ];
 
 const button = [
-  { title: "Inscription", path: "/Inscription" },
-  { title: "Connexion", path: "/Connexion" },
+  { title: "Inscription", path: "/Inscription", className: "inscription-button"},
+  { title: "Connexion", path: "/Connexion", className: "connexion-button" },
 ];
 
 export default function NavBar() {
   return (
-    <><div>
-      <Logo></Logo>
-    </div><div className="nav">
+    <>
+      <div>
+        <Logo></Logo>
+      </div>
+      <div className="nav">
         <nav className="navbar">
           <ul className="item-button">
             {/* Afficher les liens de navigation */}
@@ -35,10 +37,11 @@ export default function NavBar() {
           {/* Afficher les boutons */}
           {button.map((item) => (
             <NavLink key={item.path} to={item.path}>
-              <button>{item.title}</button>
+              <button className={item.className}>{item.title}</button>
             </NavLink>
           ))}
         </div>
-      </div></>
+      </div>
+    </>
   );
 }

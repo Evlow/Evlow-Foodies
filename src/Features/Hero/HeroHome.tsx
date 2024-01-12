@@ -1,5 +1,6 @@
 import HeroImage from "../../assets/img-home.png"
 import "./HeroHome.css"
+
 export default function HeroHome () {
 
     return (<div className="Hero-home-container">

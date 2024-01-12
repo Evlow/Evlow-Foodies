@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'typeface-advent-pro';
-import App from './app/Layout/App';
 import { RouterProvider } from 'react-router-dom';
 import { Router } from './app/Router/Router';
 const root = ReactDOM.createRoot(

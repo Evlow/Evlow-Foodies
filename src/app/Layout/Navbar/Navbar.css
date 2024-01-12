@@ -1,10 +1,8 @@
-
 .nav {
   justify-content: center;
-height: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
-
 }
 
 .navbar {
@@ -12,32 +10,34 @@ height: 80px;
   justify-content: center;
   display: flex;
   justify-content: space-around;
-  font-size: 0,9em;
+  font-size: 0.9em;
 }
-
 
 .item-button {
   display: flex;
   align-items: center;
-  height: 50px;
 }
 
 .item-button a {
+  font-size: 1.5em;
   color: black;
   justify-content: center;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px; 
   display: flex;
 }
 
-.inscription {
-  border-radius: 15px;
-  border: 1px solid #ff7f50;
-  margin-right: 10px;
-
+.inscription-button,
+.connexion-button {
+  border-radius: 10px;
+  border: none;
+  font-size: 0.9em;
+  padding: 3px 10px;
 }
 
-.connexion {
-  border-radius: 15px;
+.connexion-button {
   background-color: #ff7f50;
 }
-
+.inscription-button {
+  background-color: white;
+  border: solid 2px #ff7f50;
+}
