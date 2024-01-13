@@ -1,3 +1,10 @@
+
+@font-face {
+  font-family: "AdventPro";   /*Can be any text*/
+  src: local("AdventPro"),
+    url("./assets/AdventPro-Regular.ttf") format("truetype");
+}
+
 html,
 body,
 div,
@@ -86,7 +93,8 @@ video {
   box-sizing: border-box;
   vertical-align: baseline;
   text-decoration: none;
-font-family: Arial, Helvetica, sans-serif;
+  font-family: "AdventPro";
+
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -101,17 +109,21 @@ menu,
 nav,
 section {
   display: block;
+  max-width: 100%;
+
 }
 body {
-  max-width: 100%;
   line-height: 1;
   margin: 0px auto;
+
 }
+a,
 ol,
 ul 
 li{
   list-style: none;
   list-style-type: none;
+  color: black;
 }
 blockquote,
 q {
@@ -128,4 +140,5 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 

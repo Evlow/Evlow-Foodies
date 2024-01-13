@@ -5,6 +5,8 @@ import SweetRecipes from "../../Pages/SweetRecipes/SweetRecipes";
 import LittleGonesRecipes from "../../Pages/LittleGonesRecipes/LittleGonesRecipes";
 import SpecificRecipes from "../../Pages/SpecificRecipes/SpecificRecipes";
 import SaltRecipes from "../../Pages/SaltRecipes/SaltRecipes";
+import Inscription from "../../Pages/Inscription/Inscription";
+import Connexion from "../../Pages/Connexion/Connexion";
 
 
 export const Router = createBrowserRouter ([
@@ -18,11 +20,8 @@ export const Router = createBrowserRouter ([
             {path : 'recettes-sucrees', element : <SweetRecipes/>},
             {path : 'recettes-ptits-gones', element : <LittleGonesRecipes/>},
             {path : 'regimes-specifiques', element : <SpecificRecipes/>},
-
-
-
-           
-
+            {path : 'inscription', element : <Inscription/>},
+            {path : 'connexion', element : <Connexion/>},
         ]
     }
 ])

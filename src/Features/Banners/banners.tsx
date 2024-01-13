@@ -1,9 +1,9 @@
 import './banners.css';
 
 interface Props {
-    textBanner : string;
+    textBanner?: string | null;
     imgBanner : string;
-    positionText : "left" | "center" | "right";
+    positionText? : "left" | "center" | "right";
 }
 export default function Banners(Props : Props) {
 

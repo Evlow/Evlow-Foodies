@@ -2,6 +2,8 @@ import React from "react";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 import Logo from "../../../Logo/Logo";
+import iconConnexion from '../../../assets/connexion.svg';
+import iconInscription from  '../../../assets/inscription.svg';
 
 const nav = [
   { title: "Accueil", path: "/accueil" },
@@ -12,8 +14,19 @@ const nav = [
 ];
 
 const button = [
-  { title: "Inscription", path: "/Inscription", className: "inscription-button"},
-  { title: "Connexion", path: "/Connexion", className: "connexion-button" },
+  {
+    title: "Inscription",
+    path: "/Inscription",
+    className: "inscription-button",
+    icon: iconInscription,
+  },
+  {
+    title: "Connexion",
+    path: "/Connexion",
+    className: "connexion-button",
+    icon: iconConnexion,
+  },
+
 ];
 
 export default function NavBar() {
@@ -37,8 +50,8 @@ export default function NavBar() {
           {/* Afficher les boutons */}
           {button.map((item) => (
             <NavLink key={item.path} to={item.path}>
-              <button className={item.className}>{item.title}</button>
-            </NavLink>
+   <button className={item.className}><img src={item.icon} /> {item.title}</button>  
+             </NavLink>
           ))}
         </div>
       </div>

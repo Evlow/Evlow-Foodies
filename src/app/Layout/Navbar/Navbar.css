@@ -3,6 +3,7 @@
   height: 80px;
   display: flex;
   align-items: center;
+  margin: 100px 0 100px 0;
 }
 
 .navbar {
@@ -10,7 +11,7 @@
   justify-content: center;
   display: flex;
   justify-content: space-around;
-  font-size: 0.9em;
+  font-size: 1.2em;
 }
 
 .item-button {
@@ -19,10 +20,10 @@
 }
 
 .item-button a {
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: black;
   justify-content: center;
-  padding: 5px 10px; 
+  padding: 7px 15px; 
   display: flex;
 }
 
@@ -30,8 +31,10 @@
 .connexion-button {
   border-radius: 10px;
   border: none;
-  font-size: 0.9em;
-  padding: 3px 10px;
+  font-size: 1em;
+  padding: 3px 5px;
+  display: flex; 
+  align-items: center;
 }
 
 .connexion-button {
@@ -40,4 +43,18 @@
 .inscription-button {
   background-color: white;
   border: solid 2px #ff7f50;
+  
+}
+
+
+.inscription-button img,
+.connexion-button img {
+height: 25px;
+}
+
+/* Set a specific width for list items */
+.navbar li {
+  width: 220px; /* Adjust the width as needed */
+  text-align: center; /* Center the text within the list item */
+  justify-content: space-around;
 }
