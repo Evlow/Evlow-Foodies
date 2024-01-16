@@ -3,7 +3,7 @@
   height: 80px;
   display: flex;
   align-items: center;
-  margin: 100px 0 100px 0;
+  margin: 50px 0 50px 0px;
 }
 
 .navbar {
@@ -11,7 +11,6 @@
   justify-content: center;
   display: flex;
   justify-content: space-around;
-  font-size: 1.2em;
 }
 
 .item-button {
@@ -20,7 +19,7 @@
 }
 
 .item-button a {
-  font-size: 1.8em;
+  font-size: 1.7em;
   color: black;
   justify-content: center;
   padding: 7px 15px; 
@@ -31,7 +30,7 @@
 .connexion-button {
   border-radius: 10px;
   border: none;
-  font-size: 1em;
+  font-size: 0.8em;
   padding: 3px 5px;
   display: flex; 
   align-items: center;
@@ -54,7 +53,7 @@ height: 25px;
 
 /* Set a specific width for list items */
 .navbar li {
-  width: 220px; /* Adjust the width as needed */
+  width: 190px; /* Adjust the width as needed */
   text-align: center; /* Center the text within the list item */
   justify-content: space-around;
 }

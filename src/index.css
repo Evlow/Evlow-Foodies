@@ -3,6 +3,7 @@
   font-family: "AdventPro";   /*Can be any text*/
   src: local("AdventPro"),
     url("./assets/AdventPro-Regular.ttf") format("truetype");
+
 }
 
 html,
