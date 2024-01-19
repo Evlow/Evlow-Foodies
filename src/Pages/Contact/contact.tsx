@@ -1,16 +1,87 @@
+import { useState } from "react";
 import Banners from "../../Features/Banners/banners";
 import Descriptions from "../../Features/Descriptions/Descriptions";
 import imgRecettes from "../../assets/contact.png";
+import ContactInputForm from "../../Features/Formulaires/contactInputForm";
 
-export default function contact() {
+export default function Contact() {
+  const [userEmail, setEmail] = useState("");
+  const [userFirstName, setFirstName] = useState("");
+  const [userLastName, setLastName] = useState("");
+  const [userMessage, setMessage] = useState("");
+
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // console.log(
+    //   "Message envoyé:",
+    //   userEmail,
+    //   userFirstName,
+    //   userLastName,
+    //   userMessage
+    // );
+  };
+
+  const changeFirstName = (value: string) => {
+    setFirstName(value);
+  };
+
+  const changeLastName = (value: string) => {
+    setLastName(value);
+  };
+
+  const changeEmail = (value: string) => {
+    setEmail(value);
+  };
+
+  const changeMessage = (value: string) => {
+    setMessage(value);
+  };
+
   return (
     <div className="">
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
       <Descriptions
-        titleDescription="Des questions ?<br/> Des suggestions ?
-        "
-        textDescription="Connectez-vous dès à présent !"
+        titleDescription="Des questions ?<br/> Des suggestions ?"
+        textDescription="N’hésitez pas à nous contacter !"
       />
+<form onSubmit={submitForm}>
+  <div className="contact-form-container">
+    <div className="contact-form-input">
+      <ContactInputForm
+        type="text"
+        value={userFirstName}
+        label="*Prénom"
+        onChange={changeFirstName}
+      />
+      <ContactInputForm
+        type="text"
+        value={userLastName}
+        label="Nom"
+        onChange={changeLastName}
+      />
+    </div>
+    <div className="contact-form-input">
+      <ContactInputForm
+        type="email"
+        value={userEmail}
+        label="*Email"
+        onChange={changeEmail}
+      />
+    </div>
+    <div className="contact-form-input">
+    <ContactInputForm 
+      type="area"
+      value={userMessage}
+      label="*Message"
+      onChange={changeMessage}
+    />
+    </div>
+  </div>
+  <button name="button" className="contact-button-form" type="submit">
+    Envoyer
+  </button>
+</form>
+
     </div>
   );
 }

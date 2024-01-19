@@ -1,66 +1,84 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import Banners from "../../Features/Banners/banners";
-import imgRecettes from "../../assets/connexion.png";
 import Descriptions from "../../Features/Descriptions/Descriptions";
+import imgRecettes from "../../assets/inscription.png";
+import axios from "axios";
+import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
 
-const MyForm = () => {
-  const [formData, setFormData] = useState({ pseudo: "", email: "" });
+interface Response {
+  reponse: string | "no response";
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("https://localhost:7041/api/Auth/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-      console.log(data); // Traitez la réponse du serveur
-    } catch (error) {
-      console.error("Erreur lors de la soumission du formulaire :", error);
-    }
+export default function Connexion() {
+  const [userPseudo, setPseudo] = useState("");
+  const [userPassword, setPassword] = useState("");
+  const [response, setResponse] = useState<Response>();
+  const changePseudo = (value: string) => {
+    setPseudo(value);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const changePassword = (value: string) => {
+    setPassword(value);
+  };
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const changePseudo = (value: string) => {
+      setPseudo(value);
+    };
+    axios
+      .post<Response>(
+        "https://localhost:7041/api/Auth/Login",
+        {
+          userPseudo,
+          userPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        setResponse(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
-      <div className="">
-        <Banners imgBanner={imgRecettes} />
-        <Descriptions 
-          titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
-          textDescription="Connectez-vous dès à présent ! "
-        />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nom:
-          <input
-            type="text"
-            name="pseudo"
-            value={formData.pseudo}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Soumettre</button>
-      </form>
+      <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
+      <Descriptions
+        titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
+        textDescription="Rejoignez dès maintenant la communauté <br/>Evlow Foodies "
+      />
+
+<form onSubmit={submitForm}>
+  <div className="connexion-form-container">
+    <div className="connexion-form-input">
+      <ConnexionInputForm
+        type="text"
+        value={userPseudo}
+        label="*Pseudo"
+        onChange={changePseudo}
+      />
+    </div>
+    <div className="connexion-form-input">
+      <ConnexionInputForm
+        type="password"
+        value={userPassword}
+        label="*Mot de passe"
+        onChange={changePassword}
+      />
+    </div>
+  </div>
+  <button name="button" className="connexion-button-form" type="submit">
+    Je me connecte
+  </button>
+</form>
     </>
   );
-};
-
-export default MyForm;
+}

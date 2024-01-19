@@ -1,0 +1,35 @@
+.inscription-input-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  border-bottom: 2px solid black;
+  margin: 0 20px 0 20px;
+}
+
+.inscription-form-input {
+  display: flex;
+  justify-content: center;
+  border: none;
+  outline: none;
+  width: 200px;
+margin: auto;
+}
+
+.inscription-form-label {
+  color: gray;
+}
+
+.inscription-button-form {
+  background-color: #FF7F50;
+  height: 30px;
+  width:120px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin: auto;
+  margin-top: 20px; 
+  justify-content: center;
+}

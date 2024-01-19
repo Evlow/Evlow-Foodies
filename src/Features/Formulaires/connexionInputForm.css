@@ -1,0 +1,36 @@
+.connexion-input-container {
+  padding-top: 20px;
+  border-bottom: 2px solid black;
+  margin: 0 20px 0 20px;
+}
+  
+  .connexion-form-input {
+    display: flex;
+    justify-content: center;
+    border: none;
+    outline: none;
+    width: 250px;
+    margin: auto;
+
+
+  }
+  
+  .connexion-form-label {
+    color: gray;
+
+  }
+  
+  .connexion-button-form {
+    background-color: #FF7F50;
+    height: 30px;
+    width:120px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: auto;
+    margin-top: 20px; 
+    justify-content: center;
+  }
