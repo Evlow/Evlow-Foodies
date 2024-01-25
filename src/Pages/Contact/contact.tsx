@@ -10,6 +10,7 @@ export default function Contact() {
   const [userLastName, setLastName] = useState("");
   const [userMessage, setMessage] = useState("");
 
+
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(
@@ -68,7 +69,7 @@ export default function Contact() {
         onChange={changeEmail}
       />
     </div>
-    <div className="contact-form-input">
+    <div className="contact-form-input-message">
     <ContactInputForm 
       type="area"
       value={userMessage}
@@ -81,7 +82,9 @@ export default function Contact() {
     Envoyer
   </button>
 </form>
-
+<div>
+      
+    </div>
     </div>
   );
 }

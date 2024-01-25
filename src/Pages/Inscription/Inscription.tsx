@@ -76,7 +76,7 @@ export default function Inscription() {
 
       <form onSubmit={submitForm}>
         <div className="inscription-form-container">
-          <div className="inscription-form-input">
+          <div className="inscription-form-inputreut">
             <InscriptionInputForm
               type="text"
               value={userFirstName}

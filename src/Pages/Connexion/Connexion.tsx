@@ -4,15 +4,18 @@ import Descriptions from "../../Features/Descriptions/Descriptions";
 import imgRecettes from "../../assets/inscription.png";
 import axios from "axios";
 import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
+import { useNavigate } from "react-router-dom";
 
 interface Response {
-  reponse: string | "no response";
+  token: string;
 }
 
 export default function Connexion() {
+  const navigate = useNavigate();
   const [userPseudo, setPseudo] = useState("");
   const [userPassword, setPassword] = useState("");
-  const [response, setResponse] = useState<Response>();
+  const [response, setResponse] = useState<Response | null>(null);
+
   const changePseudo = (value: string) => {
     setPseudo(value);
   };
@@ -20,12 +23,10 @@ export default function Connexion() {
   const changePassword = (value: string) => {
     setPassword(value);
   };
+
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const changePseudo = (value: string) => {
-      setPseudo(value);
-    };
     axios
       .post<Response>(
         "https://localhost:7041/api/Auth/Login",
@@ -42,6 +43,12 @@ export default function Connexion() {
       .then((response) => {
         setResponse(response.data);
         console.log(response.data);
+
+        // Stocker le token dans le stockage local
+        localStorage.setItem("accessToken", response.data.token);
+
+        // Rediriger vers la page d'accueil après la connexion réussie
+        navigate("/accueil-back");
       })
       .catch((error) => {
         console.log(error);
@@ -56,29 +63,33 @@ export default function Connexion() {
         textDescription="Rejoignez dès maintenant la communauté <br/>Evlow Foodies "
       />
 
-<form onSubmit={submitForm}>
-  <div className="connexion-form-container">
-    <div className="connexion-form-input">
-      <ConnexionInputForm
-        type="text"
-        value={userPseudo}
-        label="*Pseudo"
-        onChange={changePseudo}
-      />
-    </div>
-    <div className="connexion-form-input">
-      <ConnexionInputForm
-        type="password"
-        value={userPassword}
-        label="*Mot de passe"
-        onChange={changePassword}
-      />
-    </div>
-  </div>
-  <button name="button" className="connexion-button-form" type="submit">
-    Je me connecte
-  </button>
-</form>
+      <form onSubmit={submitForm}>
+        <div className="connexion-form-container">
+          <div className="connexion-form-input">
+            <ConnexionInputForm
+              type="text"
+              value={userPseudo}
+              label="*Pseudo"
+              onChange={changePseudo}
+            />
+          </div>
+          <div className="connexion-form-input">
+            <ConnexionInputForm
+              type="password"
+              value={userPassword}
+              label="*Mot de passe"
+              onChange={changePassword}
+            />
+          </div>
+        </div>
+        <button
+          name="button"
+          className="connexion-button-form"
+          type="submit"
+        >
+          Je me connecte
+        </button>
+      </form>
     </>
   );
 }

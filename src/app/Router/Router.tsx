@@ -8,6 +8,7 @@ import SaltRecipes from "../../Pages/SaltRecipes/SaltRecipes";
 import Inscription from "../../Pages/Inscription/Inscription";
 import Connexion from "../../Pages/Connexion/Connexion";
 import Contact from "../../Pages/Contact/contact";
+import HomePageBackOffice from "../../Pages/HomePageBackOffice";
 
 export const Router = createBrowserRouter([
   {
@@ -15,13 +16,14 @@ export const Router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "accueil", element: <Contact /> },
+      { path: "accueil", element: <HomePage /> },
       { path: "recettes-salees", element: <SaltRecipes /> },
       { path: "recettes-sucrees", element: <SweetRecipes /> },
       { path: "recettes-ptits-gones", element: <LittleGonesRecipes /> },
       { path: "regimes-specifiques", element: <SpecificRecipes /> },
       { path: "inscription", element: <Inscription /> },
       { path: "connexion", element: <Connexion /> },
+      { path: "accueil-back", element: <HomePageBackOffice /> },
     ],
   },
 ]);
