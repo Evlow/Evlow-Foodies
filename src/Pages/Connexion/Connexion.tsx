@@ -14,7 +14,7 @@ export default function Connexion() {
   const navigate = useNavigate();
   const [userPseudo, setPseudo] = useState("");
   const [userPassword, setPassword] = useState("");
-  const [response, setResponse] = useState<Response | null>(null);
+  const [,setResponse] = useState<Response | null>(null);
 
   const changePseudo = (value: string) => {
     setPseudo(value);

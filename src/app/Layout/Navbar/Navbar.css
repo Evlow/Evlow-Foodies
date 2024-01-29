@@ -51,9 +51,8 @@
 height: 25px;
 }
 
-/* Set a specific width for list items */
 .navbar li {
-  width: 190px; /* Adjust the width as needed */
-  text-align: center; /* Center the text within the list item */
+  width: 190px;
+  text-align: center; 
   justify-content: space-around;
 }

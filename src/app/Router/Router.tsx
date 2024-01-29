@@ -8,7 +8,7 @@ import SaltRecipes from "../../Pages/SaltRecipes/SaltRecipes";
 import Inscription from "../../Pages/Inscription/Inscription";
 import Connexion from "../../Pages/Connexion/Connexion";
 import Contact from "../../Pages/Contact/contact";
-import HomePageBackOffice from "../../Pages/HomePageBackOffice";
+import HomePageBackOffice from "../../Pages/HomePageBO/HomePageBO";
 
 export const Router = createBrowserRouter([
   {

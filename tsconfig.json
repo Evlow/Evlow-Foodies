@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "Axios", "src/app/axiosConfig.tsx"  ]
 }
