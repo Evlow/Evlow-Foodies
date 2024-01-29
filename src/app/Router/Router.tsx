@@ -23,7 +23,7 @@ export const Router = createBrowserRouter([
       { path: "regimes-specifiques", element: <SpecificRecipes /> },
       { path: "inscription", element: <Inscription /> },
       { path: "connexion", element: <Connexion /> },
-      { path: "accueil-back", element: <HomePageBackOffice /> },
+      { path: "dashboard", element: <HomePageBackOffice /> },
     ],
   },
 ]);

@@ -5,9 +5,11 @@ import imgRecettes from "../../assets/inscription.png";
 import axios from "axios";
 import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
 import { useNavigate } from "react-router-dom";
+import { User } from '../../Models/user';
 
 interface Response {
   token: string;
+  user: User;
 }
 
 export default function Connexion() {
@@ -46,9 +48,10 @@ export default function Connexion() {
 
         // Stocker le token dans le stockage local
         localStorage.setItem("accessToken", response.data.token);
+        localStorage.setItem("userId", response.data.user.userId.toString());
 
         // Rediriger vers la page d'accueil après la connexion réussie
-        navigate("/accueil-back");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);

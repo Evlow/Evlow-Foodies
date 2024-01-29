@@ -5,13 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import 'typeface-advent-pro';
 import { RouterProvider } from 'react-router-dom';
 import { Router } from './app/Router/Router';
+import { CookiesProvider } from 'react-cookie';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  <CookiesProvider>
   <React.StrictMode>
     <RouterProvider router={Router} />
   </React.StrictMode>
+  </CookiesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

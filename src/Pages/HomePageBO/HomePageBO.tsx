@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from '../../app/axiosConfig';
+import axios from "axios";
 import Aside from "../../app/Layout/Aside/aside";
-import { User } from "../../Models/user";
+import { User } from '../../Models/user';
 import Header from "../../app/Layout/Header/header";
 import { Recipe } from '../../Models/recipe';
 import '../HomePageBO/HomePageBO.css'
+import { Cookies, useCookies } from "react-cookie";
 
 interface Response {
   token: string;
@@ -13,35 +14,43 @@ interface Response {
 export default function HomePageBackOffice() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [cookies, setCookie] = useCookies();
 
-    useEffect(() => {
-      axios.get('/User')
-      .then(response => {
-        setUser(response.data);
-      })
-      .catch(error => {
-      console.error('Erreur lors de la récupération des tâches : ',
-      error);
-      });
-      }, []);
-
+  useEffect(() => {
     const token = localStorage.getItem("accessToken");
 
     if (token) {
+      // Récupérer les informations de l'utilisateur
       axios
-        .get<User>("https://localhost:7041/api/User", {
+        .get<User>("https://localhost:7041/api/User/"+localStorage.getItem("userId"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
           setUser(response.data);
+
+          // Récupérer les recettes de l'utilisateur
+          axios
+            .get<Recipe[]>("https://localhost:7041/api/Recipe/GetRecipesByUserId/"+localStorage.getItem("userId"), {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then((recipesResponse) => {
+              setRecipes(recipesResponse.data);
+            })
+            .catch((recipesError) => {
+              console.log(recipesError);
+            });
+
+          console.log(cookies.User);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  
+  }, []); 
 
   return (
     <>
@@ -51,9 +60,10 @@ export default function HomePageBackOffice() {
       <div className="dashboard">
         {user && (
           <>
-            <div className="content-profil">   
-              <section className="edit-profil">
-              <h2>Bienvenue {user.userFirstName} sur ton espace !</h2>
+            <div className="content-profil">
+            <h2 className="h2-welcome">Bienvenue {user.userFirstName} sur ton espace !</h2>
+            <section className="edit-profil">
+   
                 <h3 className="h3-profil"> Mes infos personnelles </h3>
                 <div className="profil">
                   <p><strong>Nom : </strong> {user.userLastName}</p>
@@ -79,19 +89,19 @@ export default function HomePageBackOffice() {
                 </div>
               </section>
 
-              {/* <section className="edit-recipe">
-                <h3 className="h3-profil"> Mes recettes publiées ({userData.Recipe.length}) </h3>
+              <section className="edit-recipe">
+                <h3 className="h3-profil"> Mes recettes publiées ({recipes.length}) </h3>
                 <div className="profil">
-                  {<recipeData.Recipe.map((recipe, index) => (
+                  {recipes.map((recipe, index) => (
                     <div key={index} className="profil">
-                      <p><strong>Titre : </strong> {recipe.title}</p>
-                      <p><strong>Catégorie : </strong>{recipe.category}</p>
-                      <p><strong>Date de création : </strong>{new Date(recipe.createdAt).toLocaleDateString()}</p>
+                      <p><strong>Titre : </strong> {recipe.recipeTitle}</p>
+                      <p><strong>Catégorie : </strong>{recipe.categoryId}</p>
+                      <p><strong>Date de création : </strong>{new Date(recipe.recipeCreatedAt).toLocaleDateString()}</p>
                       <br />
                     </div>
                   ))}
                 </div>
-              </section> */}
+              </section>
             </div>
           </>
         )}

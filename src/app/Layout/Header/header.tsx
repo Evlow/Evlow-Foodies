@@ -1,53 +1,54 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./header.css";
 import iconSite from "../../../assets/site.svg";
 import iconDeconnexion from "../../../assets/deconnexion.svg";
 
-const link = [
+const links = [
   { title: "Evlow Foodies", path: "/accueil", className: "evlow-navbar" },
+];
+
+const buttons = [
   {
     title: "Accéder au site",
     path: "/accueil",
     className: "evlow-foodies",
     icon: iconSite,
   },
-];
-
-const button = [
   {
     title: "Déconnexion",
-    path: "/accueil",
+    path: "/deconnexion",
     className: "deconnexion-navbar",
     icon: iconDeconnexion,
   },
 ];
 
 export default function Header() {
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+    navigate("/accueil");
+  };
 
-
-
-
-  
   return (
     <header>
       <nav>
         <ul className="ul-header">
-          {/* Afficher les boutons */}
-          {link.map((item) => (
+          {/* Afficher les liens */}
+          {links.map((item) => (
             <li key={item.path} className={item.className}>
-              <NavLink to={item.path}>
-                <img src={item.icon} alt={item.title} />
-                {item.title}
-              </NavLink>
+              <NavLink to={item.path}>{item.title}</NavLink>
             </li>
           ))}
-          {button.map((item) => (
+          {/* Afficher le bouton de déconnexion */}
+          {buttons.map((item) => (
             <li key={item.path} className={item.className}>
-              <NavLink to={item.path}>
+              <button onClick={handleLogout}>
                 <img src={item.icon} alt={item.title} />
                 {item.title}
-              </NavLink>
+              </button>
             </li>
           ))}
         </ul>

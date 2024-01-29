@@ -7,15 +7,12 @@ import Header from "./Header/header";
 function App() {
   return (
     <>
- {localStorage.getItem('accessToken') ? (
-  <Header />
-) : <Navbar />}
-<Outlet />
-{localStorage.getItem('accessToken') ? (
-  null
-) : <Footer />}
+   
+
+      <Outlet />
+    
     </>
   );
 }
-
+// todo faire la ternaire
 export default App;

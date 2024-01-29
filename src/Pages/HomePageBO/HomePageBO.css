@@ -1,4 +1,31 @@
 .content-profil {
-display: flex;
-    margin: auto 0;
-justify-content: center;}
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  flex-direction: column;
+}
+
+.edit-profil,
+.edit-recipe {
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: rgba(255, 127, 80, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 0 20px 0;
+}
+
+.h2-welcome{
+    font-size: 2em;
+  text-align: center;
+  padding: 40px;
+}
+
+.h3-profil{
+   color: #ffa05c;
+   padding-bottom: 20px;
+   font-size: 1.3em;
+}
