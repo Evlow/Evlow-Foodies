@@ -14,7 +14,7 @@ interface Response {
 export default function HomePageBackOffice() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [cookies, setCookie] = useCookies();
+  const [cookies,] = useCookies();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");

@@ -17,24 +17,22 @@ header {
   display: flex;
   align-items: center;
   background-color: #ff7f50;
-} 
-
+}
 
 .evlow-foodies,
 img {
   height: 30px;
-} 
-.deconnexion-navbar, 
+}
+.deconnexion-navbar,
 img {
   height: 30px;
 }
 
-.deconnexion-navbar{
-    border : solid 1px white;
-    border-radius: 20px;
-
+.deconnexion-navbar {
+  border: solid 1px white;
+  border-radius: 20px;
 }
 
-.ul-header{
-    display: flex;
+.ul-header {
+  display: flex;
 }

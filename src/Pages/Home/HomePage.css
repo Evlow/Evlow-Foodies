@@ -1,0 +1,40 @@
+
+section {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  h3 {
+    font-size: 1.8em;
+    width: 60%;
+    padding: 40px 0 40px 0;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .home-h3:before {
+    content: "";
+    left: 0;
+    right: 0;
+    height: 2px;
+    background:#9ce7a9;
+    position: absolute;
+    top: calc(50% - 1px);
+  }
+  
+  .home-h3 span {
+    display: inline-block;
+    padding: 0 10px;
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  .p-home{
+    width: 40%;
+   text-align: center;
+   font-size: 1.3em;
+   margin: 0 auto;
+   line-height:1.3em;
+  }

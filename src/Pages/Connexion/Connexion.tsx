@@ -6,6 +6,8 @@ import axios from "axios";
 import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
 import { useNavigate } from "react-router-dom";
 import { User } from '../../Models/user';
+import NavBar from "../../app/Layout/Navbar/Navbar";
+import Footer from "../../app/Layout/Footer/Footer";
 
 interface Response {
   token: string;
@@ -60,6 +62,7 @@ export default function Connexion() {
 
   return (
     <>
+    <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
       <Descriptions
         titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
@@ -93,6 +96,7 @@ export default function Connexion() {
           Je me connecte
         </button>
       </form>
+      <Footer></Footer>
     </>
   );
 }

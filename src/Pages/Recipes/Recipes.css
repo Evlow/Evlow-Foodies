@@ -1,0 +1,82 @@
+.card,
+.add-recipe {
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  width: 20%;
+}
+
+.add-recipe {
+  padding: 100px;
+border: black 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+
+.recipes {
+  padding-top: 30px;
+  height: 100vh;
+}
+
+.content-card {
+    
+  flex-direction: column;
+}
+.card,
+.add-recipe {
+  background-color: rgb(107, 23, 23);
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  width: 20%;
+}
+
+
+.btn-card {
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn-edit {
+  color: black;
+  padding: 5px;
+  border: 2px solid #868484;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100px;
+  
+}
+
+.btn-delete {
+  color: black;
+  padding: 5px;
+  border: 2px solid #eb5757;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100px;
+}
+
+.content-recipe-img {
+  width: 100%;
+  height: auto;
+}
+
+.recipe-img-home {
+  width: 250px;
+  overflow: hidden;
+  -o-object-fit: cover;
+  object-fit: cover;
+  height: 220px;
+}
+
+.recipes-h3 {
+  padding: 20px;
+  font-size: 1.3em;
+  width: 100%;
+}

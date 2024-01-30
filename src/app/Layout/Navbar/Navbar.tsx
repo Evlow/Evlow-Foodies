@@ -16,13 +16,13 @@ const nav = [
 const button = [
   {
     title: "Inscription",
-    path: "/Inscription",
+    path: "/inscription",
     className: "inscription-button",
     icon: iconInscription,
   },
   {
     title: "Connexion",
-    path: "/Connexion",
+    path: "/connexion",
     className: "connexion-button",
     icon: iconConnexion,
   },

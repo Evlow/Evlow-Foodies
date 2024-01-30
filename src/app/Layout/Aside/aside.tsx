@@ -7,22 +7,22 @@ import iconCorbeille from  '../../../assets/corbeille.svg';
 
 
 const aside = [
-  { title: "Accueil", path: "/Accueil", className: "item-button-aside", icon: iconAccueil },
+  { title: "Accueil", path: "/accueil", className: "item-button-aside", icon: iconAccueil },
   {
     title: "Recettes",
-    path: "/Recettes",
+    path: "/recettes",
     className: "item-button-aside",
     icon: iconRecipes,
   },
   {
     title: "Favoris",
-    path: "/Favoris",
+    path: "/favoris",
     className: "item-button-aside",
     icon: iconFavori,
   },
   {
     title: "Corbeille",
-    path: "/Corbeille",
+    path: "/corbeille",
     className: "item-button-aside",
     icon: iconCorbeille,
   },

@@ -4,6 +4,8 @@ import Descriptions from "../../Features/Descriptions/Descriptions";
 import imgRecettes from "../../assets/inscription.png";
 import axios from "axios";
 import InscriptionInputForm from '../../Features/Formulaires/inscriptionInputForm';
+import NavBar from "../../app/Layout/Navbar/Navbar";
+import Footer from "../../app/Layout/Footer/Footer";
 
 interface Response {
   reponse: string | "no response";
@@ -68,6 +70,7 @@ export default function Inscription() {
 
   return (
     <>
+    <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
       <Descriptions
         titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
@@ -123,6 +126,7 @@ export default function Inscription() {
           Je m'inscris
         </button>
       </form>
+      <Footer></Footer>
     </>
   );
 }
