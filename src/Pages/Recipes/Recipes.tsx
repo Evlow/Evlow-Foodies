@@ -8,15 +8,14 @@ import { User } from "../../Models/user";
 import { useCookies } from "react-cookie";
 import { Recipe } from "../../Models/recipe";
 
-
 interface Response {
-    token: string;
-  }
+  token: string;
+}
 
 const RecipeForm: React.FC = () => {
-    const [user, setUser] = useState<User>();
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [cookies,] = useCookies();
+  const [user, setUser] = useState<User>();
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [cookies] = useCookies();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -24,21 +23,28 @@ const RecipeForm: React.FC = () => {
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
-        .get<User>("https://localhost:7041/api/User/"+localStorage.getItem("userId"), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get<User>(
+          "https://localhost:7041/api/User/" + localStorage.getItem("userId"),
+          {
+            headers: {
+              // Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           setUser(response.data);
 
           // Récupérer les recettes de l'utilisateur
           axios
-            .get<Recipe[]>("https://localhost:7041/api/Recipe/GetRecipesByUserId/"+localStorage.getItem("userId"), {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
+            .get<Recipe[]>(
+              "https://localhost:7041/api/Recipe/GetRecipesByUserId/" +
+                localStorage.getItem("userId"),
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
             .then((recipesResponse) => {
               setRecipes(recipesResponse.data);
             })
@@ -68,7 +74,7 @@ const RecipeForm: React.FC = () => {
               </h2>
             </Link>
           </div>
-    
+
           {recipes.map((recipe) => (
             <div key={recipe.recipeId} className="card">
               <h3 className="recipes-h3">{recipe.recipeTitle}</h3>
@@ -82,10 +88,16 @@ const RecipeForm: React.FC = () => {
                 </Link>
               </div>
               <div className="btn-card">
-                <Link to={`/recipes/edit/${recipe.recipeId}`} className="btn-edit">
+                <Link
+                  to={`/recipes/edit/${recipe.recipeId}`}
+                  className="btn-edit"
+                >
                   MODIFIER
                 </Link>
-                <a href={`/recipes/delete/${recipe.recipeId}`} className="btn-delete">
+                <a
+                  href={`/recipes/delete/${recipe.recipeId}`}
+                  className="btn-delete"
+                >
                   SUPPRIMER
                 </a>
               </div>

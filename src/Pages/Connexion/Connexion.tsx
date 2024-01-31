@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Banners from "../../Features/Banners/banners";
 import Descriptions from "../../Features/Descriptions/Descriptions";
-import imgRecettes from "../../assets/inscription.png";
+import imgRecettes from "../../assets/connexion.png";
 import axios from "axios";
 import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +88,7 @@ export default function Connexion() {
             />
           </div>
         </div>
+        <>
         <button
           name="button"
           className="connexion-button-form"
@@ -95,6 +96,7 @@ export default function Connexion() {
         >
           Je me connecte
         </button>
+        </>
       </form>
       <Footer></Footer>
     </>

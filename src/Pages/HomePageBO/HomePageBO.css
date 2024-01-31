@@ -7,7 +7,7 @@
 
 .edit-profil,
 .edit-recipe {
-  width: 30%;
+  width: 20%;
   margin: 0 auto;
   text-align: center;
   border-radius: 5px;
@@ -15,17 +15,21 @@
   margin-top: 20px;
   background-color: rgba(255, 127, 80, 0.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px 0 20px 0;
+  padding: 30px 0 30px 0;
 }
 
 .h2-welcome{
     font-size: 2em;
   text-align: center;
-  padding: 40px;
+  padding: 30px;
 }
 
 .h3-profil{
    color: #ffa05c;
-   padding-bottom: 20px;
+   padding-bottom: 25px;
    font-size: 1.3em;
 }
+
+
+.p-profil{
+line-height: 1.5em;}

@@ -61,10 +61,10 @@ export default function HomePageBackOffice() {
         {user && (
           <>
             <div className="content-profil">
-            <h2 className="h2-welcome">Bienvenue {user.userFirstName} sur ton espace !</h2>
+            <h2 className="h2-welcome">Bienvenue {user.userFirstName}, sur ton espace !</h2>
             <section className="edit-profil">
    
-                <h3 className="h3-profil"> Mes infos personnelles </h3>
+                <h3 className="h3-profil"> Mes informations personnelles </h3>
                 <div className="profil">
                   <p><strong>Nom : </strong> {user.userLastName}</p>
                   <br />
@@ -78,12 +78,7 @@ export default function HomePageBackOffice() {
                 <div className="buttons-edit">
                   <div className="edit-password">
                     <a className="btn-edit-password" href={`/edit-password/${user.userId}`}>
-                      Modifier mon mot de passe
-                    </a>
-                  </div>
-                  <div className="edit-email">
-                    <a className="btn-edit-email" href={`/edit/${user.userId}`}>
-                      Modifier mon email
+                      Modifier mes informations personnels
                     </a>
                   </div>
                 </div>
@@ -94,9 +89,9 @@ export default function HomePageBackOffice() {
                 <div className="profil">
                   {recipes.map((recipe, index) => (
                     <div key={index} className="profil">
-                      <p><strong>Titre : </strong> {recipe.recipeTitle}</p>
-                      <p><strong>Catégorie : </strong>{recipe.categoryId}</p>
-                      <p><strong>Date de création : </strong>{new Date(recipe.recipeCreatedAt).toLocaleDateString()}</p>
+                      <p className="p-profil" ><strong>Titre : </strong> {recipe.recipeTitle}</p>
+                      <p className="p-profil"><strong>Catégorie : </strong>{recipe.categoryId}</p>
+                      <p className="p-profil"><strong>Date de création : </strong>{new Date(recipe.recipeCreatedAt).toLocaleDateString()}</p>
                       <br />
                     </div>
                   ))}

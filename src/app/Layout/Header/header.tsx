@@ -4,20 +4,16 @@ import "./header.css";
 import iconSite from "../../../assets/site.svg";
 import iconDeconnexion from "../../../assets/deconnexion.svg";
 
-const links = [
-  { title: "Evlow Foodies", path: "/accueil", className: "evlow-navbar" },
-];
-
 const buttons = [
   {
     title: "Accéder au site",
     path: "/accueil",
-    className: "evlow-foodies",
+    className: "accueil-navbar",
     icon: iconSite,
   },
   {
     title: "Déconnexion",
-    path: "/deconnexion",
+    path: "/accueil",
     className: "deconnexion-navbar",
     icon: iconDeconnexion,
   },
@@ -34,21 +30,26 @@ export default function Header() {
 
   return (
     <header>
+      <h2 className="evlow-foodies">Evlow Foodies</h2>
       <nav>
         <ul className="ul-header">
-          {/* Afficher les liens */}
-          {links.map((item) => (
-            <li key={item.path} className={item.className}>
-              <NavLink to={item.path}>{item.title}</NavLink>
-            </li>
-          ))}
-          {/* Afficher le bouton de déconnexion */}
           {buttons.map((item) => (
             <li key={item.path} className={item.className}>
-              <button onClick={handleLogout}>
-                <img src={item.icon} alt={item.title} />
-                {item.title}
-              </button>
+              {item.path ? (
+                <NavLink to={item.path}>
+                  <div className="button-content">
+                    <img src={item.icon} alt={item.title} />
+                    <span>{item.title}</span>
+                  </div>
+                </NavLink>
+              ) : (
+                <button onClick={handleLogout}>
+                  <div className="button-content">
+                    <img src={item.icon} alt={item.title} />
+                    <span>{item.title}</span>
+                  </div>
+                </button>
+              )}
             </li>
           ))}
         </ul>

@@ -38,10 +38,14 @@
 
 .connexion-button {
   background-color: #ff7f50;
+  cursor: pointer;
+
 }
 .inscription-button {
   background-color: white;
   border: solid 2px #ff7f50;
+  cursor: pointer;
+
   
 }
 
