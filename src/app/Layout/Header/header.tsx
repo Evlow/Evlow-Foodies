@@ -13,7 +13,7 @@ const buttons = [
   },
   {
     title: "Déconnexion",
-    path: "/accueil",
+    // path: "/#",
     className: "deconnexion-navbar",
     icon: iconDeconnexion,
   },
@@ -23,8 +23,9 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("userId");
+    delete localStorage["accessToken"];
+    delete localStorage["userId"];
+    localStorage.clear()
     navigate("/accueil");
   };
 
@@ -33,8 +34,8 @@ export default function Header() {
       <h2 className="evlow-foodies">Evlow Foodies</h2>
       <nav>
         <ul className="ul-header">
-          {buttons.map((item) => (
-            <li key={item.path} className={item.className}>
+          {buttons.map((item, index) => (
+            <li key={index} className={item.className}>
               {item.path ? (
                 <NavLink to={item.path}>
                   <div className="button-content">

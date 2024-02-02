@@ -24,7 +24,7 @@ const RecipeForm: React.FC = () => {
       // Récupérer les informations de l'utilisateur
       axios
         .get<User>(
-          "https://localhost:7041/api/User/" + localStorage.getItem("userId"),
+          "http://localhost:5041/api/User/" + localStorage.getItem("userId"),
           {
             headers: {
               // Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const RecipeForm: React.FC = () => {
           // Récupérer les recettes de l'utilisateur
           axios
             .get<Recipe[]>(
-              "https://localhost:7041/api/Recipe/GetRecipesByUserId/" +
+              "http://localhost:5041/api/Recipe/GetRecipesByUserId/" +
                 localStorage.getItem("userId"),
               {
                 headers: {

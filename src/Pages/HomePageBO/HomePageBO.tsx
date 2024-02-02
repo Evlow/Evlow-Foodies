@@ -15,6 +15,7 @@ export default function HomePageBackOffice() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [cookies,] = useCookies();
+  const userCookie = cookies.User;
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -22,7 +23,7 @@ export default function HomePageBackOffice() {
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
-        .get<User>("https://localhost:7041/api/User/"+localStorage.getItem("userId"), {
+        .get<User>("http://localhost:5041/api/User/"+localStorage.getItem("userId"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +33,7 @@ export default function HomePageBackOffice() {
 
           // Récupérer les recettes de l'utilisateur
           axios
-            .get<Recipe[]>("https://localhost:7041/api/Recipe/GetRecipesByUserId/"+localStorage.getItem("userId"), {
+            .get<Recipe[]>("http://localhost:5041/api/Recipe/GetRecipesByUserId/"+localStorage.getItem("userId"), {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -44,7 +45,11 @@ export default function HomePageBackOffice() {
               console.log(recipesError);
             });
 
-          console.log(cookies.User);
+            if (userCookie) {
+              console.log(userCookie);
+            } else {
+              console.log("User cookie not found");
+            }
         })
         .catch((error) => {
           console.log(error);

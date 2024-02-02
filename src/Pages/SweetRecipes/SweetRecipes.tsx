@@ -10,7 +10,7 @@ export default function SweetRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    fetch("https://localhost:7041/api/Recipe/GetRecipesByCategoryId/2")
+    fetch("http://localhost:5041/api/Recipe/GetRecipesByCategoryId/2")
       .then((response) => response.json())
       .then((data) => setRecipes(data));
   }, []);

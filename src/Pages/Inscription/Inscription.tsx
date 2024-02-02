@@ -12,24 +12,16 @@ interface Response {
 }
 
 export default function Inscription() {
-  const [userFirstName, setFirstName] = useState("");
-  const [userLastName, setLastName] = useState("");
-  const [userPseudo, setPseudo] = useState("");
-  const [userEmail, setEmail] = useState("");
-  const [userPassword, setPassword] = useState("");
+
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [userConfirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState<Response>();
 
-  const changeFirstName = (value: string) => {
-    setFirstName(value);
-  };
 
-  const changeLastName = (value: string) => {
-    setLastName(value);
-  };
-
-  const changePseudo = (value: string) => {
-    setPseudo(value);
+  const changeUserName = (value: string) => {
+    setUserName(value);
   };
 
   const changeEmail = (value: string) => {
@@ -48,12 +40,10 @@ export default function Inscription() {
     e.preventDefault();
   
     axios
-      .post<Response>("https://localhost:7041/api/Auth/Register", {
-        userFirstName,
-        userLastName,
-        userPseudo,
-        userEmail,
-        userPassword,
+      .post<Response>("http://localhost:5041/api/Authentication/Register", {
+        userName,
+        email,
+        password,
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -79,30 +69,16 @@ export default function Inscription() {
 
       <form onSubmit={submitForm}>
         <div className="inscription-form-container">
-          <div className="inscription-form-inputreut">
-            <InscriptionInputForm
-              type="text"
-              value={userFirstName}
-              onChange={changeFirstName}
-              label="*Prénom"
-            />
-            <InscriptionInputForm
-              type="text"
-              value={userLastName}
-              onChange={changeLastName}
-              label="*Nom"
-            />
-          </div>
           <div className="inscription-form-input">
             <InscriptionInputForm
               type="text"
-              value={userPseudo}
-              onChange={changePseudo}
+              value={userName}
+              onChange={changeUserName}
               label="*Pseudo"
             />
             <InscriptionInputForm
               type="email"
-              value={userEmail}
+              value={email}
               onChange={changeEmail}
               label="*Email"
             />
@@ -110,7 +86,7 @@ export default function Inscription() {
           <div className="inscription-form-input">
             <InscriptionInputForm
               type="password"
-              value={userPassword}
+              value={password}
               onChange={changePassword}
               label="*Mot de passe"
             />

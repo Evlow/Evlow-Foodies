@@ -16,12 +16,12 @@ interface Response {
 
 export default function Connexion() {
   const navigate = useNavigate();
-  const [userPseudo, setPseudo] = useState("");
-  const [userPassword, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [,setResponse] = useState<Response | null>(null);
 
-  const changePseudo = (value: string) => {
-    setPseudo(value);
+  const changeUserName = (value: string) => {
+    setUserName(value);
   };
 
   const changePassword = (value: string) => {
@@ -33,10 +33,10 @@ export default function Connexion() {
 
     axios
       .post<Response>(
-        "https://localhost:7041/api/Auth/Login",
+        "http://localhost:5041/api/Authentication/Login/Login",
         {
-          userPseudo,
-          userPassword,
+          userName,
+          password,
         },
         {
           headers: {
@@ -50,7 +50,7 @@ export default function Connexion() {
 
         // Stocker le token dans le stockage local
         localStorage.setItem("accessToken", response.data.token);
-        localStorage.setItem("userId", response.data.user.userId.toString());
+        // localStorage.setItem("userId", response.data.user.userId.toString());
 
         // Rediriger vers la page d'accueil après la connexion réussie
         navigate("/dashboard");
@@ -74,15 +74,15 @@ export default function Connexion() {
           <div className="connexion-form-input">
             <ConnexionInputForm
               type="text"
-              value={userPseudo}
+              value={userName}
               label="*Pseudo"
-              onChange={changePseudo}
+              onChange={changeUserName}
             />
           </div>
           <div className="connexion-form-input">
             <ConnexionInputForm
               type="password"
-              value={userPassword}
+              value={password}
               label="*Mot de passe"
               onChange={changePassword}
             />
