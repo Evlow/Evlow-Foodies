@@ -23,7 +23,7 @@ export default function HomePageBackOffice() {
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
-        .get<User>("http://localhost:5041/api/User/"+localStorage.getItem("userId"), {
+        .get<User>("http://localhost:5041/api/User/"+localStorage.getItem("userName"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +33,7 @@ export default function HomePageBackOffice() {
 
           // Récupérer les recettes de l'utilisateur
           axios
-            .get<Recipe[]>("http://localhost:5041/api/Recipe/GetRecipesByUserId/"+localStorage.getItem("userId"), {
+            .get<Recipe[]>("http://localhost:5041/api/Recipe/GetRecipesByUserName/"+localStorage.getItem("userName"), {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -66,15 +66,11 @@ export default function HomePageBackOffice() {
         {user && (
           <>
             <div className="content-profil">
-            <h2 className="h2-welcome">Bienvenue {user.userFirstName}, sur ton espace !</h2>
+            <h2 className="h2-welcome">Bienvenue , sur ton espace !</h2>
             <section className="edit-profil">
    
                 <h3 className="h3-profil"> Mes informations personnelles </h3>
                 <div className="profil">
-                  <p><strong>Nom : </strong> {user.userLastName}</p>
-                  <br />
-                  <p><strong>Prénom : </strong>{user.userFirstName}</p>
-                  <br />
                   <p><strong>Pseudo : </strong> {user.userPseudo}</p>
                   <br />
                   <p><strong>Email : </strong> {user.userEmail}</p>

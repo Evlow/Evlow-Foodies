@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Banners from "../../Features/Banners/banners";
 import Descriptions from "../../Features/Descriptions/Descriptions";
 import imgRecettes from "../../assets/inscription.png";
@@ -8,10 +9,12 @@ import NavBar from "../../app/Layout/Navbar/Navbar";
 import Footer from "../../app/Layout/Footer/Footer";
 
 interface Response {
-  reponse: string | "no response";
+  token: string;
 }
 
+
 export default function Inscription() {
+  const navigate = useNavigate();
 
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,6 +22,9 @@ export default function Inscription() {
   const [userConfirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState<Response>();
 
+  const handleLogin = () => {
+    navigate("/connexion");
+  };
 
   const changeUserName = (value: string) => {
     setUserName(value);
@@ -38,7 +44,7 @@ export default function Inscription() {
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     axios
       .post<Response>("http://localhost:5041/api/Authentication/Register", {
         userName,
@@ -52,15 +58,22 @@ export default function Inscription() {
       .then((response) => {
         setResponse(response.data);
         console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+        
+       // Stocker le token dans le stockage local
+       localStorage.setItem("accessToken", response.data.token);
+       // localStorage.setItem("userId", response.data.user.userId.toString());
+
+       // Rediriger vers la page d'accueil après la connexion réussie
+       navigate("/connexion");
+     })
+     .catch((error) => {
+       console.log(error);
+     });
+ };
 
   return (
     <>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
       <Descriptions
         titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"

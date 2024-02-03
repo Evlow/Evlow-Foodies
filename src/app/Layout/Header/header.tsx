@@ -24,7 +24,6 @@ export default function Header() {
 
   const handleLogout = () => {
     delete localStorage["accessToken"];
-    delete localStorage["userId"];
     localStorage.clear()
     navigate("/accueil");
   };
