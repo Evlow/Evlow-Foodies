@@ -11,7 +11,7 @@ import Footer from "../../app/Layout/Footer/Footer";
 
 interface Response {
   token: string;
-  user: User;
+  userId: string;
 }
 
 export default function Connexion() {
@@ -45,12 +45,14 @@ export default function Connexion() {
         }
       )
       .then((response) => {
-        setResponse(response.data);
         console.log(response.data);
+
+        setResponse(response.data);
+        
 
         // Stocker le token dans le stockage local
         localStorage.setItem("accessToken", response.data.token);
-        // localStorage.setItem("userId", response.data.user.userId.toString());
+        localStorage.setItem("userId", response.data.userId);
 
         // Rediriger vers la page d'accueil après la connexion réussie
         navigate("/dashboard");

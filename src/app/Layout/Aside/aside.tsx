@@ -7,7 +7,7 @@ import iconCorbeille from  '../../../assets/corbeille.svg';
 
 
 const aside = [
-  { title: "Accueil", path: "/accueil", className: "item-button-aside", icon: iconAccueil },
+  { title: "Accueil", path: "/dashboard", className: "item-button-aside", icon: iconAccueil },
   {
     title: "Recettes",
     path: "/recettes",

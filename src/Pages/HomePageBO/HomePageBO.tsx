@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Aside from "../../app/Layout/Aside/aside";
-import { User } from '../../Models/user';
 import Header from "../../app/Layout/Header/header";
-import { Recipe } from '../../Models/recipe';
 import '../HomePageBO/HomePageBO.css'
 import { Cookies, useCookies } from "react-cookie";
+import { User } from "../../Models/user";
+import { Recipe } from "../../Models/recipe";
 
-interface Response {
-  token: string;
-}
+
 
 export default function HomePageBackOffice() {
   const [user, setUser] = useState<User>();
@@ -19,25 +17,33 @@ export default function HomePageBackOffice() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
+
 
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
-        .get<User>("http://localhost:5041/api/User/"+localStorage.getItem("userName"), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get<User>(
+          `http://localhost:5041/api/User/GetUserAndRecipes?userId=${userId}`,
+          {
+            headers: {
+               Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           setUser(response.data);
 
           // Récupérer les recettes de l'utilisateur
           axios
-            .get<Recipe[]>("http://localhost:5041/api/Recipe/GetRecipesByUserName/"+localStorage.getItem("userName"), {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
+            .get<Recipe[]>(
+              `http://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
             .then((recipesResponse) => {
               setRecipes(recipesResponse.data);
             })
@@ -45,17 +51,13 @@ export default function HomePageBackOffice() {
               console.log(recipesError);
             });
 
-            if (userCookie) {
-              console.log(userCookie);
-            } else {
-              console.log("User cookie not found");
-            }
+          console.log(cookies.User);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -66,33 +68,20 @@ export default function HomePageBackOffice() {
         {user && (
           <>
             <div className="content-profil">
-            <h2 className="h2-welcome">Bienvenue , sur ton espace !</h2>
-            <section className="edit-profil">
-   
-                <h3 className="h3-profil"> Mes informations personnelles </h3>
-                <div className="profil">
-                  <p><strong>Pseudo : </strong> {user.userPseudo}</p>
-                  <br />
-                  <p><strong>Email : </strong> {user.userEmail}</p>
-                  <br />
-                </div>
-                <div className="buttons-edit">
-                  <div className="edit-password">
-                    <a className="btn-edit-password" href={`/edit-password/${user.userId}`}>
-                      Modifier mes informations personnels
-                    </a>
-                  </div>
-                </div>
+              <h2 className="h2-welcome">Bienvenue {user.userName}, sur ton espace !</h2>
+              <section className="edit-profil">
+                <p><strong>Pseudo : </strong> {user.userName}</p>
+                <p><strong>Email : </strong> {user.email}</p>
+                {/* Other user information */}
               </section>
 
               <section className="edit-recipe">
-                <h3 className="h3-profil"> Mes recettes publiées ({recipes.length}) </h3>
+                <h3 className="h3-profil">Mes recettes publiées ({recipes.length})</h3>
                 <div className="profil">
                   {recipes.map((recipe, index) => (
                     <div key={index} className="profil">
-                      <p className="p-profil" ><strong>Titre : </strong> {recipe.recipeTitle}</p>
-                      <p className="p-profil"><strong>Catégorie : </strong>{recipe.categoryId}</p>
-                      <p className="p-profil"><strong>Date de création : </strong>{new Date(recipe.recipeCreatedAt).toLocaleDateString()}</p>
+                      <p className="p-profil"><strong>Titre : </strong> {recipe.recipeTitle}</p>
+                      <p className="p-profil"><strong>Catégorie : </strong> {recipe.categoryId}</p>
                       <br />
                     </div>
                   ))}

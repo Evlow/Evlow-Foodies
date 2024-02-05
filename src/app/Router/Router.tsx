@@ -10,6 +10,7 @@ import Connexion from "../../Pages/Connexion/Connexion";
 import Contact from "../../Pages/Contact/contact";
 import HomePageBackOffice from "../../Pages/HomePageBO/HomePageBO";
 import Recipes from "../../Pages/Recipes/Recipes";
+import AddRecipe from "../../Pages/AddRecipes/AddRecipes";
 
 export const Router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ export const Router = createBrowserRouter([
       { path: "connexion", element: <Connexion /> },
       { path: "dashboard", element: <HomePageBackOffice /> },
       { path: "recettes", element: <Recipes /> },
-      // { path: "ajouter-recette", element: <Recipes /> },
+      { path: "ajouter-une-recette", element: <AddRecipe /> },
       // { path: "modifier-recette", element: <Recipes /> },
       // { path: "favoris", element: <Favoris /> },
       // { path: "corbeille", element: <Basket /> },

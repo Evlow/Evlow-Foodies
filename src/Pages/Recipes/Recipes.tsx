@@ -10,24 +10,28 @@ import { Recipe } from "../../Models/recipe";
 
 interface Response {
   token: string;
+  userId: string;
+
 }
 
-const RecipeForm: React.FC = () => {
+export default function Recipes()  {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [cookies] = useCookies();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
+
 
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
         .get<User>(
-          "http://localhost:5041/api/User/" + localStorage.getItem("userId"),
+          `http://localhost:5041/api/User/GetUserAndRecipes?userId=${userId}`,
           {
             headers: {
-              // Authorization: `Bearer ${token}`,
+               Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -37,8 +41,7 @@ const RecipeForm: React.FC = () => {
           // Récupérer les recettes de l'utilisateur
           axios
             .get<Recipe[]>(
-              "http://localhost:5041/api/Recipe/GetRecipesByUserId/" +
-                localStorage.getItem("userId"),
+              `http://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -109,4 +112,3 @@ const RecipeForm: React.FC = () => {
   );
 };
 
-export default RecipeForm;
