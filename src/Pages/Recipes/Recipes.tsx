@@ -99,33 +99,30 @@ export default function Recipes() {
           </div>
 
           {recipes.map((recipe) => (
-            <div key={recipe.recipeId} className="card">
-              <h3 className="recipes-h3">{recipe.recipeTitle}</h3>
-              <div className="content-recipe-img">
-                <Link to={`/recipe_sheet/${recipe.recipeId}`}>
-                  <img
-                    className="recipe-img-home"
-                    src={`/images/${recipe.recipePicture}`}
-                    alt="image"
-                  />
-                </Link>
-              </div>
-              <div className="btn-card">
-                <Link
-                  to={`/recipes/edit/${recipe.recipeId}`}
-                  className="btn-edit"
-                >
-                  MODIFIER
-                </Link>
-                <button
-                  onClick={() => deleteRecipe(recipe.recipeId)}
-                  className="btn-delete"
-                >
-                  SUPPRIMER
-                </button>
-              </div>
-            </div>
-          ))}
+  <div key={recipe.recipeId} className="card">
+    <Link to={`/sheet-recipe/${recipe.recipeId}`} className="recipe-link">
+      <h3 className="recipes-h3">{recipe.recipeTitle}</h3>
+      <div className="content-recipe-img">
+        <img
+          className="recipe-img-home"
+          src={`/images/${recipe.recipePicture}`}
+          alt="image"
+        />
+      </div>
+    </Link>
+    <div className="btn-card">
+      <Link to={`/recipes/edit/${recipe.recipeId}`} className="btn-edit">
+        MODIFIER
+      </Link>
+      <button
+        onClick={() => deleteRecipe(recipe.recipeId)}
+        className="btn-delete"
+      >
+        SUPPRIMER
+      </button>
+    </div>
+  </div>
+))}
         </section>
       </article>
     </>

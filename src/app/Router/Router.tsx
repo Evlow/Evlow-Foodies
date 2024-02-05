@@ -12,6 +12,7 @@ import HomePageBackOffice from "../../Pages/HomePageBO/HomePageBO";
 import Recipes from "../../Pages/Recipes/Recipes";
 import AddRecipe from "../../Pages/AddRecipes/AddRecipes";
 import Corbeille from "../../Pages/Corbeille/Corbeille";
+import SheetRecipe from "../../Pages/SheetRecipe/SheetRecipe";
 
 export const Router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const Router = createBrowserRouter([
       // { path: "modifier-une-recette", element: <Recipes /> },
       // { path: "favoris", element: <Favoris /> },
       { path: "corbeille", element: <Corbeille /> },
+      { path: "sheet-recipe/:id", element: <SheetRecipe /> }
     ],
   },
 ]);
