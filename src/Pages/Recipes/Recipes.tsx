@@ -11,10 +11,9 @@ import { Recipe } from "../../Models/recipe";
 interface Response {
   token: string;
   userId: string;
-
 }
 
-export default function Recipes()  {
+export default function Recipes() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [cookies] = useCookies();
@@ -23,7 +22,6 @@ export default function Recipes()  {
     const token = localStorage.getItem("accessToken");
     const userId = localStorage.getItem("userId");
 
-
     if (token) {
       // Récupérer les informations de l'utilisateur
       axios
@@ -31,7 +29,7 @@ export default function Recipes()  {
           `http://localhost:5041/api/User/GetUserAndRecipes?userId=${userId}`,
           {
             headers: {
-               Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -54,14 +52,36 @@ export default function Recipes()  {
             .catch((recipesError) => {
               console.log(recipesError);
             });
-
-          console.log(cookies.User);
         })
         .catch((error) => {
           console.log(error);
         });
     }
   }, []);
+
+  const deleteRecipe = (recipeId: number) => {
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      axios
+        .delete(
+          `http://localhost:5041/api/Recipe/DeleteRecipe/${recipeId}`,          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          // Mettez à jour l'état des recettes après la suppression
+          setRecipes((prevRecipes) =>
+            prevRecipes.filter((recipe) => recipe.recipeId !== recipeId)
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <>
@@ -97,12 +117,12 @@ export default function Recipes()  {
                 >
                   MODIFIER
                 </Link>
-                <a
-                  href={`/recipes/delete/${recipe.recipeId}`}
+                <button
+                  onClick={() => deleteRecipe(recipe.recipeId)}
                   className="btn-delete"
                 >
                   SUPPRIMER
-                </a>
+                </button>
               </div>
             </div>
           ))}
@@ -110,5 +130,4 @@ export default function Recipes()  {
       </article>
     </>
   );
-};
-
+}
