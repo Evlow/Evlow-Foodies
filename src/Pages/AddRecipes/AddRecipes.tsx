@@ -1,63 +1,92 @@
+import React, { useState } from "react";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-interface RecipeFormData {
-  RecipeTitle: string;
+interface Response {
   token: string;
 }
 
 export default function AddRecipes() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RecipeFormData>();
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [recipeTitle, setRecipeTitle] = useState("");
+  const [selectedImage, setSelectedImage] = useState<File | null>(null); 
 
-  const onSubmit = async (data: RecipeFormData) => {
-    const token = localStorage.getItem("accessToken");
-    try {
-      setIsLoading(true);
-      const response = await axios.post(
-        "http://localhost:5041/api/Recipe/CreateRecipe",
-        data,
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    let userId = localStorage.getItem("userId");
+    let token = localStorage.getItem("accessToken");
+
+    const formData = new FormData();
+    formData.append("recipeTitle", recipeTitle);
+    formData.append("userId", userId!);
+    formData.append("recipePicture", selectedImage!.name);
+    console.log("le nom de mon image est : "+selectedImage!.name);
+
+    axios
+      .post<Response>(
+        "https://localhost:5041/api/Recipe/CreateRecipe",
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", 
           },
         }
-      );
-      console.log(response.data);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+      )
+      .then((response) => {
+        console.log(response.data);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
     <>
       <h2>Ajouter une recette</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={submitForm}>
         <div className="content-add-recipe">
           <div className="content-title">
-            <label htmlFor="RecipeTitle">Titre de la recette</label>
             <input
               type="text"
-              id="RecipeTitle"
-              {...register("RecipeTitle", { required: "Titre requis" })}
+              value={recipeTitle}
+              onChange={(e) => setRecipeTitle(e.target.value)}
+              placeholder="Titre de la recette"
             />
-            {errors.RecipeTitle && <p>{errors.RecipeTitle.message}</p>}
+          </div>
+          <div>
+            {selectedImage && (
+              <div>
+                <img
+                  alt="Preview"
+                  width={"250px"}
+                  src={URL.createObjectURL(selectedImage)}
+                />
+                <br />
+                <button onClick={() => setSelectedImage(null)}>Remove</button>
+              </div>
+            )}
+            <br />
+            <input
+              type="file"
+              name="myImage"
+              onChange={(event) => {
+                setSelectedImage(event.target.files![0]); 
+              }}
+            />
           </div>
         </div>
-        <input className="btn-bo" type="submit" value="Publier" />
-        {isLoading && <p>Chargement en cours...</p>}
+        <button
+          name="button"
+          className="connexion-button-form"
+          type="submit"
+          disabled={!selectedImage || recipeTitle.trim() === ""}
+        >
+          Publier
+        </button>
       </form>
     </>
   );
-};
+}

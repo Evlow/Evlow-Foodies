@@ -22,9 +22,9 @@ export default function Inscription() {
   const [userConfirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState<Response>();
 
-  const handleLogin = () => {
-    navigate("/connexion");
-  };
+  // const handleLogin = () => {
+  //   navigate("/connexion");
+  // };
 
   const changeUserName = (value: string) => {
     setUserName(value);
@@ -46,7 +46,7 @@ export default function Inscription() {
     e.preventDefault();
 
     axios
-      .post<Response>("http://localhost:5041/api/Authentication/Register", {
+      .post<Response>("https://localhost:5041/api/Authentication/Register", {
         userName,
         email,
         password,

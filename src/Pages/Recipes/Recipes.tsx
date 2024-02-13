@@ -26,7 +26,7 @@ export default function Recipes() {
       // Récupérer les informations de l'utilisateur
       axios
         .get<User>(
-          `http://localhost:5041/api/User/GetUserAndRecipes?userId=${userId}`,
+          `https://localhost:5041/api/User/GetUserById?userId=${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function Recipes() {
           // Récupérer les recettes de l'utilisateur
           axios
             .get<Recipe[]>(
-              `http://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
+              `https://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ export default function Recipes() {
     if (token) {
       axios
         .delete(
-          `http://localhost:5041/api/Recipe/DeleteRecipe/${recipeId}`,          {
+          `https://localhost:5041/api/Recipe/DeleteRecipe/${recipeId}`,          {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -90,7 +90,7 @@ export default function Recipes() {
       <article className="recipes">
         <section className="content-card">
           <div className="add-recipe">
-            <Link to="/recipes/add">
+            <Link to="/ajouter-une-recette">
               <h2>
                 + <br />
                 Ajouter une recette

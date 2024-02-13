@@ -5,7 +5,6 @@ import imgRecettes from "../../assets/connexion.png";
 import axios from "axios";
 import ConnexionInputForm from "../../Features/Formulaires/connexionInputForm";
 import { useNavigate } from "react-router-dom";
-import { User } from '../../Models/user';
 import NavBar from "../../app/Layout/Navbar/Navbar";
 import Footer from "../../app/Layout/Footer/Footer";
 
@@ -33,7 +32,7 @@ export default function Connexion() {
 
     axios
       .post<Response>(
-        "http://localhost:5041/api/Authentication/Login/Login",
+        "https://localhost:5041/api/Authentication/Login/Login",
         {
           userName,
           password,

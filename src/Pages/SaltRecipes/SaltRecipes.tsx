@@ -10,7 +10,7 @@ export default function SaltRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5041/api/Recipe/GetRecipesByCategoryId/1")
+    fetch("https://localhost:5041/api/Recipe/GetRecipesByCategoryId/1")
       .then((response) => response.json())
       .then((data) => setRecipes(data));
   }, []);

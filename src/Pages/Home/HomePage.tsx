@@ -10,7 +10,7 @@ export default function HomePage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5041/api/Recipe/GetRecipes")
+    fetch("https://localhost:5041/api/Recipe/GetRecipes")
       .then((response) => response.json())
       .then((data) => setRecipes(data));
   }, []);
