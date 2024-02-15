@@ -11,7 +11,7 @@ export default function AddRecipes() {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null); 
 
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let userId = localStorage.getItem("userId");
@@ -21,7 +21,7 @@ export default function AddRecipes() {
     formData.append("recipeTitle", recipeTitle);
     formData.append("userId", userId!);
     formData.append("recipePicture", selectedImage!.name);
-    console.log("le nom de mon image est : "+selectedImage!.name);
+
 
     axios
       .post<Response>(
@@ -41,7 +41,24 @@ export default function AddRecipes() {
       .catch((error) => {
         console.error(error);
       });
+    
+        try {
+  //   const formData = new FormData();
+  //   formData.append('image', selectedImage);
+
+    const response = await axios.post('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // onUploadSuccess(response.data.imageUrl);
+  } catch (error) {
+    console.error('Error uploading image:', error);
+  }
   };
+
+
 
   return (
     <>

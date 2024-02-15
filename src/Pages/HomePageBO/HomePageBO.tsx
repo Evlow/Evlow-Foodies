@@ -79,9 +79,7 @@ export default function HomePageBackOffice() {
                 <p>
                   <strong>Email : </strong> {user.email}
                 </p>
-                {/* Other user information */}
               </section>
-
               <section className="edit-recipe">
                 <h3 className="h3-profil">
                   Mes recettes publiées ({recipes.length})
