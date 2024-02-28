@@ -65,7 +65,7 @@ export default function HomePageBackOffice() {
       <Header />
       <Aside />
 
-      <div className="dashboard">
+      <article className="dashboard">
         {user && (
           <>
             <div className="content-profil">
@@ -101,7 +101,7 @@ export default function HomePageBackOffice() {
             </div>
           </>
         )}
-      </div>
+      </article>
     </>
   );
 }

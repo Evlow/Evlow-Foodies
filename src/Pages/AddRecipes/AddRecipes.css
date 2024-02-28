@@ -1,0 +1,40 @@
+.content-add-recipe {
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.content-add-recipe-title {
+  justify-content: center;
+  margin-top: 80px;
+  text-align: center;
+}
+.article-add-recipe {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.section-ingredients-preparations {
+  width: 50%;
+  background-color: rgba(255, 127, 80, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  display: flex;
+}
+
+.ingredients, .preparations {
+  display: flex;
+  align-items:  center;
+  font-size: 1.8em
+}
+
+.title-preparation, .title-ingredient {
+
+  padding-left: 20px;
+}
+
+.image-recipe {
+  justify-content: center;
+  margin-bottom: 30px;
+  text-align: center;}

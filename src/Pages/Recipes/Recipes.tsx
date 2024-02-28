@@ -47,7 +47,20 @@ export default function Recipes() {
               }
             )
             .then((recipesResponse) => {
-              setRecipes(recipesResponse.data);
+              const recettes = recipesResponse.data;
+              const coder = new TextEncoder()
+              const transformed = recettes.map(recette => {
+                const encoded = coder.encode(recette.recipePicture);
+                const blob = new Blob([encoded.buffer], {
+                  type: "image/jpg"
+                });
+                
+                const objurl = URL.createObjectURL(blob);
+                console.log(objurl)
+                recette.recipePicture = objurl;
+                return recette;
+              })
+              setRecipes(transformed);
             })
             .catch((recipesError) => {
               console.log(recipesError);
@@ -58,7 +71,7 @@ export default function Recipes() {
         });
     }
   }, []);
-
+  
   const deleteRecipe = (recipeId: number) => {
     const token = localStorage.getItem("accessToken");
 
@@ -105,7 +118,7 @@ export default function Recipes() {
       <div className="content-recipe-img">
         <img
           className="recipe-img-home"
-          src={`/images/${recipe.recipePicture}`}
+          src={recipe.recipePicture}
           alt="image"
         />
       </div>

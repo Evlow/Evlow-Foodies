@@ -2,7 +2,7 @@ import React from 'react';
 import '../Formulaires/inscriptionInputForm.css';
 
 interface Props {
-  type: 'text' 
+  type: "textarea" | "text"
   value: string;
   onChange: (value: string) => void;
   label: string;
@@ -10,10 +10,10 @@ interface Props {
 
 const CreateRecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
   return (
-    <div className="createRecipe-input-container">
-      <label className="createRecipe-form-label" htmlFor={label}>{label}</label>
+    <div className="create-recipe-input-container">
+      <label className="create-recipe-form-label" htmlFor={label}>{label}</label>
       <input 
-        className="createRecipe-form-input"
+        className="create-recipe-form-input"
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
