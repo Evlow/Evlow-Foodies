@@ -22,10 +22,6 @@ export default function Inscription() {
   const [userConfirmPassword, setConfirmPassword] = useState("");
   const [response, setResponse] = useState<Response>();
 
-  // const handleLogin = () => {
-  //   navigate("/connexion");
-  // };
-
   const changeUserName = (value: string) => {
     setUserName(value);
   };

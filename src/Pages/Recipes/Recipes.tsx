@@ -46,21 +46,10 @@ export default function Recipes() {
                 },
               }
             )
-            .then((recipesResponse) => {
+            .then(async (recipesResponse) => {
               const recettes = recipesResponse.data;
-              const coder = new TextEncoder()
-              const transformed = recettes.map(recette => {
-                const encoded = coder.encode(recette.recipePicture);
-                const blob = new Blob([encoded.buffer], {
-                  type: "image/jpg"
-                });
-                
-                const objurl = URL.createObjectURL(blob);
-                console.log(objurl)
-                recette.recipePicture = objurl;
-                return recette;
-              })
-              setRecipes(transformed);
+              console.log(recettes);
+              setRecipes(recettes);
             })
             .catch((recipesError) => {
               console.log(recipesError);
@@ -71,21 +60,19 @@ export default function Recipes() {
         });
     }
   }, []);
-  
+
   const deleteRecipe = (recipeId: number) => {
     const token = localStorage.getItem("accessToken");
 
     if (token) {
       axios
-        .delete(
-          `https://localhost:5041/api/Recipe/DeleteRecipe/${recipeId}`,          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .delete(`https://localhost:5041/api/Recipe/DeleteRecipe/${recipeId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
-          // Mettez à jour l'état des recettes après la suppression
+          // Misr à jour l'état des recettes après la suppression
           setRecipes((prevRecipes) =>
             prevRecipes.filter((recipe) => recipe.recipeId !== recipeId)
           );
@@ -112,30 +99,36 @@ export default function Recipes() {
           </div>
 
           {recipes.map((recipe) => (
-  <div key={recipe.recipeId} className="card">
-    <Link to={`/sheet-recipe/${recipe.recipeId}`} className="recipe-link">
-      <h3 className="recipes-h3">{recipe.recipeTitle}</h3>
-      <div className="content-recipe-img">
-        <img
-          className="recipe-img-home"
-          src={recipe.recipePicture}
-          alt="image"
-        />
-      </div>
-    </Link>
-    <div className="btn-card">
-      <Link to={`/recipes/edit/${recipe.recipeId}`} className="btn-edit">
-        MODIFIER
-      </Link>
-      <button
-        onClick={() => deleteRecipe(recipe.recipeId)}
-        className="btn-delete"
-      >
-        SUPPRIMER
-      </button>
-    </div>
-  </div>
-))}
+            <div key={recipe.recipeId} className="card">
+              <Link
+                to={`/${recipe.recipeTitle}/${recipe.recipeId}`}
+                className="recipe-link"
+              >
+                <h3 className="recipes-h3">{recipe.recipeTitle}</h3>
+                <div className="content-recipe-img">
+                  <img
+                    className="recipe-img-home"
+                    src={recipe.pictureUrl}
+                    alt={recipe.recipeTitle}
+                  />
+                </div>
+              </Link>
+              <div className="btn-card">
+                <Link
+                  to={`/recipes/edit/${recipe.recipeId}`}
+                  className="btn-edit"
+                >
+                  MODIFIER
+                </Link>
+                <button
+                  onClick={() => deleteRecipe(recipe.recipeId)}
+                  className="btn-delete"
+                >
+                  SUPPRIMER
+                </button>
+              </div>
+            </div>
+          ))}
         </section>
       </article>
     </>

@@ -56,13 +56,7 @@ export default function AddRecipes() {
     const formData = new FormData();
     formData.append("recipeTitle", recipeTitle);
     formData.append("userId", userId!);
-    
-    if (!selectedImage || recipeTitle.length <= 1) {
-      alert("Veuillez remplir correctement les champs")
-      return false;
-    }
-
-    formData.append("recipePicture", selectedImage);
+    formData.append("recipePicture", selectedImage!.name);
     // Parcourt chaque élément du tableau ingredients et ajoute ces éléments au FormData
     ingredients.forEach((ingredient, index) => {
       formData.append(`ngredientN${index + 1}`, ingredient);
@@ -79,6 +73,7 @@ export default function AddRecipes() {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       )
@@ -89,6 +84,21 @@ export default function AddRecipes() {
       .catch((error) => {
         console.error(error);
       });
+
+    try {
+      //   const formData = new FormData();
+      //   formData.append('image', selectedImage);
+
+      const response = await axios.post("/api/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // onUploadSuccess(response.data.imageUrl);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   return (
@@ -99,12 +109,12 @@ export default function AddRecipes() {
         <h2>Ajouter une recette</h2>
         <form onSubmit={submitForm}>
           <div className="content-add-recipe-title">
-            <CreateRecipeInputForm
-              type="text"
-              value={recipeTitle}
-              onChange={changeRecipeTitle}
-              label="Titre de la recette"
-            />
+              <CreateRecipeInputForm
+                type="text"
+                value={recipeTitle}
+                onChange={changeRecipeTitle}
+                label="Titre de la recette"
+              />   
           </div>
           <div className="image-recipe">
             {selectedImage && (
@@ -128,16 +138,17 @@ export default function AddRecipes() {
             />
           </div>
           <section className="section-ingredients-preparations">
-            <div className="ingredients">
-              <img
-                src={process.env.PUBLIC_URL + "/Images/ingredient.png"}
-                height="80px"
-                width="80px"
-                alt=""
-              />
-              <h2 className="title-ingredient">Ingrédients</h2>
-            </div>
 
+
+            <div className="ingredients">
+            <img
+              src={process.env.PUBLIC_URL + "/Images/ingredient.png"}
+              height="80px"
+              width="80px"
+              alt=""
+            />
+            <h2 className="title-ingredient">Ingrédients</h2>
+            </div>
             <div className="create-recipe-input-row">
               <CreateRecipeInputForm
                 type="text"
@@ -207,14 +218,17 @@ export default function AddRecipes() {
             </button>
           </section>
           <section className="section-ingredients-preparations">
-            <div className="preparations">
-              <img
-                src={process.env.PUBLIC_URL + "/Images/preparation.png"}
-                height="80px"
-                width="80px"
-                alt=""
-              />
-              <h2 className="title-preparation">Préparations</h2>
+
+
+          <div className="preparations">
+
+            <img
+              src={process.env.PUBLIC_URL + "/Images/preparation.png"}
+              height="80px"
+              width="80px"
+              alt=""
+            />
+            <h2 className="title-preparation">Préparations</h2>
             </div>
             <CreateRecipeInputForm
               type="textarea"
@@ -222,64 +236,64 @@ export default function AddRecipes() {
               onChange={(value) => handleChangePreparation(0, value)}
               label="Préparation n° 1"
             />
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[1]}
-                onChange={(value) => handleChangePreparation(1, value)}
-                label="Préparation n° 2"
-              />
-            </div>
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[2]}
-                onChange={(value) => handleChangePreparation(2, value)}
-                label="Préparation n° 3"
-              />
-            </div>
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[3]}
-                onChange={(value) => handleChangePreparation(3, value)}
-                label="Préparation n° 4"
-              />
-            </div>
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[4]}
-                onChange={(value) => handleChangePreparation(4, value)}
-                label="Préparation n° 5"
-              />
-            </div>
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[5]}
-                onChange={(value) => handleChangePreparation(5, value)}
-                label="Préparation n° 6"
-              />
-            </div>
-            <div className="create-recipe-input-row">
-              <CreateRecipeInputForm
-                type="textarea"
-                value={preparations[6]}
-                onChange={(value) => handleChangePreparation(6, value)}
-                label="Préparation n° 7"
-              />
-            </div>
+          <div className="create-recipe-input-row">
             <CreateRecipeInputForm
               type="textarea"
-              value={preparations[7]}
-              onChange={(value) => handleChangePreparation(7, value)}
-              label="Préparation n° 8"
+              value={preparations[1]}
+              onChange={(value) => handleChangePreparation(1, value)}
+              label="Préparation n° 2"
             />
+          </div>
+          <div className="create-recipe-input-row">
+            <CreateRecipeInputForm
+              type="textarea"
+              value={preparations[2]}
+              onChange={(value) => handleChangePreparation(2, value)}
+              label="Préparation n° 3"
+            />
+          </div>
+          <div className="create-recipe-input-row">
+            <CreateRecipeInputForm
+              type="textarea"
+              value={preparations[3]}
+              onChange={(value) => handleChangePreparation(3, value)}
+              label="Préparation n° 4"
+            />
+          </div>
+          <div className="create-recipe-input-row">
+            <CreateRecipeInputForm
+              type="textarea"
+              value={preparations[4]}
+              onChange={(value) => handleChangePreparation(4, value)}
+              label="Préparation n° 5"
+            />
+          </div>
+          <div className="create-recipe-input-row">
+            <CreateRecipeInputForm
+              type="textarea"
+              value={preparations[5]}
+              onChange={(value) => handleChangePreparation(5, value)}
+              label="Préparation n° 6"
+            />
+          </div>
+          <div className="create-recipe-input-row">
+            <CreateRecipeInputForm
+              type="textarea"
+              value={preparations[6]}
+              onChange={(value) => handleChangePreparation(6, value)}
+              label="Préparation n° 7"
+            />
+          </div>
+          <CreateRecipeInputForm
+            type="textarea"
+            value={preparations[7]}
+            onChange={(value) => handleChangePreparation(7, value)}
+            label="Préparation n° 8"
+          />
 
-            <button type="button" onClick={addPreparation}>
-              Ajouter une préparation
-            </button>
+          <button type="button" onClick={addPreparation}>
+            Ajouter une préparation
+          </button>
           </section>
           <button name="button" className="connexion-button-form" type="submit">
             Publier

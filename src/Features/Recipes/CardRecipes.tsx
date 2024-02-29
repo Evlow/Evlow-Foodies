@@ -12,7 +12,7 @@ const CardRecipes: React.FC<Props> = ({ recipe }) => {
       <a href={`/recipe/${recipe.recipeId}`} className="recipe-link">
         <div className="card-recipes">
           <img
-            src={process.env.PUBLIC_URL + "/images/" + recipe.recipePicture}
+            src={recipe.pictureUrl}
             alt={recipe.recipeTitle}
             className="recipe-image" 
           />

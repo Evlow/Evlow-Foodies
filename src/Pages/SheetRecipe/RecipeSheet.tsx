@@ -1,44 +1,71 @@
-import React, { useState } from 'react';
-import { Recipe } from '../../Models/recipe';
-
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Recipe } from "../../Models/recipe";
+import { useParams } from "react-router-dom";
+import NavBar from "../../app/Layout/Navbar/Navbar";
+import Footer from "../../app/Layout/Footer/Footer";
+import "./RecipeSheet.css";
+import iconPreparation from "../../assets/preparation.svg";
+import iconIngredient from "../../assets/ingredient.svg";
 
 export default function RecipeSheet() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const { recipeId } = useParams<{ recipeId: string }>();
+  const [recipe, setRecipe] = useState<Recipe | undefined>();
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await axios.get(
+          `https://localhost:5041/api/Recipe/RecipeId/${parseInt(recipeId!)}`
+        );
+        setRecipe(response.data);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      }
+    };
+
+    fetchRecipes();
+  }, [recipeId]);
 
   return (
     <div className="content-intro-recipe-sheet">
-      <div className="paragraphe-recipe-sheet">
-        <h3 className="h3-recipe-sheet">{}</h3>
-      </div>
-      {/* ... autres éléments du modèle */}
-      <article className="content-article">
-        <section className="section-preparations">
-          <div className="bloc-title">
-            <div className="ovale">
+      <NavBar></NavBar>
+      <div key={recipe?.recipeId} className="recipe-card">
+        <div className="paragraphe-recipe-sheet">
+          <h3 className="h3-recipe-sheet">{recipe?.recipeTitle}</h3>
+        </div>
+
+        <div className="content-recipe-img">
+          <img
+            className="recipe-img-home"
+            src={recipe?.pictureUrl}
+            alt={recipe?.recipeTitle}
+          />
+        </div>
+        <article className="content-article">
+          <section className="section-preparations">
+            <div className="bloc-title">
               <h4 className="title-flex">
-                <img
-                  className="preparations"
-                  src="/assets/picture/preparation.svg"
-                  alt="image préparation"
-                />
+                <img src={iconIngredient} />
+                Ingrédients
+              </h4>
+            </div>
+          </section>
+          <section className="section-preparations">
+            <div className="bloc-title">
+              <h4 className="sheet-recipe-h4">
+                <img src={iconPreparation} />
                 Préparations
               </h4>
             </div>
-          </div>
-          <ul>
-            {/* {[1, 2, 3, 4, 5, 6].map((index) => (
-              <li key={index}>
-                {recipe[`preparation${index}`] && (
-                  <>
-                    <span className="list-number">{index}.</span>{' '}
-                    {recipe[`preparation${index}`]}
-                  </>
-                )}
-              </li>
-            ))} */}
-          </ul>
-        </section>
-      </article>
+            <div>
+              <p>Étape n°1</p>
+              <p>{recipe?.ingredientN1}</p>
+            </div>
+          </section>
+        </article>
+      </div>
+      <Footer></Footer>
     </div>
   );
 }

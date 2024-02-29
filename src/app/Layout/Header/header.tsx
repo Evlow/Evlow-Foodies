@@ -13,7 +13,6 @@ const buttons = [
   },
   {
     title: "Déconnexion",
-    // path: "/#",
     className: "deconnexion-navbar",
     icon: iconDeconnexion,
   },

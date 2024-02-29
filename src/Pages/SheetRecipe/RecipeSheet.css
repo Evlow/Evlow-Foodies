@@ -1,0 +1,32 @@
+.h3-recipe-sheet {
+    font-size: 2em;
+}
+/* 
+.sheet-recipe-h4 {
+    font-size: 1.8em;
+    width: 60%;
+    padding: 40px 0 40px 0;
+    text-align: left;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .sheet-recipe-h4:before {
+    content: "";
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background: #9ce7a9;
+    position: absolute;
+    top: calc(50% - 1px);
+  }
+  
+  .sheet-recipe-h4 span {
+    display: inline-block;
+    padding: 0 10px;
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+   */
+
