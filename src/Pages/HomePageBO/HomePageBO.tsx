@@ -10,14 +10,14 @@ import { Recipe } from "../../Models/recipe";
 export default function HomePageBackOffice() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipeCategories, setRecipeCategories] = useState<string[]>([]); // Nouvel état pour stocker les noms des catégories
   const [cookies] = useCookies();
   const userCookie = cookies.User;
 
   useEffect(() => {
-    if (token) {
-      // Récupérer les informations de l'utilisateur
-      const token = localStorage.getItem("accessToken");
-      const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
+    if (token && userId) {
       axios
         .get<User>(
           `https://localhost:5041/api/User/GetUserById?userId=${userId}`,
@@ -30,35 +30,35 @@ export default function HomePageBackOffice() {
         )
         .then((response) => {
           setUser(response.data);
-
-          console.log(cookies.User);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }, []);
 
-  // Récupérer les recettes de l'utilisateur
-  const token = localStorage.getItem("accessToken");
-  const userId = localStorage.getItem("userId");
   useEffect(() => {
-  axios
-    .get<Recipe[]>(
-      `https://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((recipesResponse) => {
-      setRecipes(recipesResponse.data);
-    })
-    .catch((recipesError) => {
-      console.log(recipesError);
-  });
-}, []);
+    const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      axios
+        .get<Recipe[]>(
+          `https://localhost:5041/api/Recipe/GetRecipesByUserId?userId=${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((recipesResponse) => {
+          setRecipes(recipesResponse.data);
+        })
+        .catch((recipesError) => {
+          console.error(recipesError);
+        });
+    }
+  }, []);
+
 
   return (
     <>
@@ -90,10 +90,6 @@ export default function HomePageBackOffice() {
                       <p className="p-profil">
                         <strong>Titre : </strong> {recipe.recipeTitle}
                       </p>
-                      <p className="p-profil">
-                        <strong>Catégorie : </strong> {recipe.categoryId}
-                      </p>
-                      <br />
                     </div>
                   ))}
                 </div>

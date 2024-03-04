@@ -9,10 +9,10 @@ import Inscription from "../../Pages/Inscription/Inscription";
 import Connexion from "../../Pages/Connexion/Connexion";
 import Contact from "../../Pages/Contact/contact";
 import HomePageBackOffice from "../../Pages/HomePageBO/HomePageBO";
-import Recipes from "../../Pages/Recipes/Recipes";
+import Recipes from "../../Pages/RecipesBO/Recipes";
 import RecipeSheet from "../../Pages/SheetRecipe/RecipeSheet";
 import AddRecipes from "../../Pages/AddRecipes/AddRecipes";
-import AddRecipes2 from "../../Pages/AddRecipes/AddRecipes2";
+import EditRecipe from "../../Pages/EditRecipes/EditRecipe";
 
 export const Router = createBrowserRouter([
   {
@@ -29,8 +29,8 @@ export const Router = createBrowserRouter([
       { path: "connexion", element: <Connexion /> },
       { path: "dashboard", element: <HomePageBackOffice /> },
       { path: "recettes", element: <Recipes /> },
-      { path: "ajouter-une-recette", element: <AddRecipes2 /> },
-      // { path: "modifier-une-recette", element: <Recipes /> },
+      { path: "ajouter-une-recette", element: <AddRecipes /> },
+      { path: "modifier-une-recette/:recipeId", element: <EditRecipe/> },
      { path: ":recipeTitle/:recipeId", element: <RecipeSheet/> }
     ],
   },

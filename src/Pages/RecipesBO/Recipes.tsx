@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from 'react-router-dom';
 import Header from "../../app/Layout/Header/header";
 import Aside from "../../app/Layout/Aside/aside";
-import "../Recipes/Recipes.css";
+import "./Recipes.css";
 import axios from "axios";
 import { User } from "../../Models/user";
 import { useCookies } from "react-cookie";
@@ -17,6 +17,10 @@ export default function Recipes() {
   const [user, setUser] = useState<User>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [cookies] = useCookies();
+
+  const handleItemClick = (itemId: number) => {
+    window.location.href = `/modifier-une-recette/${itemId}`;
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -61,6 +65,26 @@ export default function Recipes() {
     }
   }, []);
 
+  const editRecipe = (recipeId: number) => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      axios
+        .put(`https://localhost:5041/api/Recipe/UpdateRecipe/${recipeId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Mise à jour l'état des recettes après la suppression
+          setRecipes((prevRecipes) =>
+            prevRecipes.filter((recipe) => recipe.recipeId !== recipeId)
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const deleteRecipe = (recipeId: number) => {
     const token = localStorage.getItem("accessToken");
 
@@ -72,7 +96,7 @@ export default function Recipes() {
           },
         })
         .then((response) => {
-          // Misr à jour l'état des recettes après la suppression
+          // Mise à jour l'état des recettes après la suppression
           setRecipes((prevRecipes) =>
             prevRecipes.filter((recipe) => recipe.recipeId !== recipeId)
           );
@@ -114,12 +138,17 @@ export default function Recipes() {
                 </div>
               </Link>
               <div className="btn-card">
-                <Link
-                  to={`/recipes/edit/${recipe.recipeId}`}
+                {/* <Link
+                  to={`modifier-une-recette/${recipe.recipeId}`}
                   className="btn-edit"
                 >
                   MODIFIER
-                </Link>
+                </Link> */}
+                <button className="btn-edit"
+                onClick={() => handleItemClick(recipe.recipeId)}
+                >
+                MODIFIER
+                </button>
                 <button
                   onClick={() => deleteRecipe(recipe.recipeId)}
                   className="btn-delete"

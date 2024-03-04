@@ -1,21 +1,19 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import RecipeInputForm from "../../Features/Formulaires/createRecipeInputForm";
-import "./AddRecipes.css";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import Header from "../../app/Layout/Header/header";
 import Aside from "../../app/Layout/Aside/aside";
-import axios from "axios";
+import RecipeInputForm from "../../Features/Formulaires/createRecipeInputForm";
 import { Category } from "../../Models/category";
-import { Recipe } from "../../Models/recipe";
+import { DateTime } from "luxon";
 
-interface Response {
-  token: string;
-}
-interface Item {
+interface Recipe {
+  recipeId: number;
   categoryId: number;
   recipeTitle: string;
   pictureUrl: string;
-  recipeCreatedAt: Date;
-  recipeUpdatedAt: Date;
+  // recipeCreatedAt: DateTime;
+  recipeUpdatedAt: DateTime;
   recipeStarNote: number;
   ingredientN1: string;
   ingredientN2: string;
@@ -36,13 +34,14 @@ interface Item {
   image: File | null;
 }
 
-const AddRecipes: React.FC = () => {
-  const [item, setItem] = useState<Item>({
+const EditRecipe: React.FC = () => {
+  const [item, setItem] = useState<Recipe>({
+    recipeId: 0,
     categoryId: 0,
     recipeTitle: "",
     pictureUrl: "",
-    recipeCreatedAt: new Date(),
-    recipeUpdatedAt: new Date(),
+    // recipeCreatedAt: DateTime.now(),
+    recipeUpdatedAt: DateTime.now(),    
     recipeStarNote: 0,
     ingredientN1: "",
     ingredientN2: "",
@@ -63,56 +62,45 @@ const AddRecipes: React.FC = () => {
     image: null,
   });
 
-  // Fonction pour gérer le changement de l'image sélectionnée par l'utilisateur
+  const { recipeId } = useParams<{ recipeId: string }>();
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        let token = localStorage.getItem("accessToken");
+        const response = await axios.get<Recipe>(
+          `https://localhost:5041/api/Recipe/RecipeId/${parseInt(recipeId!)}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const recipeData = response.data;
+        setItem(recipeData);
+      } catch (error) {
+        console.error("Error fetching recipe details:", error);
+      }
+
+      console.log("ma recette : ", item);
+    };
+
+    fetchRecipe();
+  }, [recipeId]);
+
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // Vérifie si des fichiers ont été sélectionnés
     if (e.target.files) {
-      const imageURL = URL.createObjectURL(e.target.files[0]); // Crée une URL pour l'image sélectionnée
-      setImageURL(imageURL); // Met à jour l'URL de l'image dans l'état local
+      // Met à jour l'état de l'objet item en ajoutant l'image sélectionnée
       setItem({
-        ...item,
-        image: e.target.files[0], // Met à jour l'image dans l'état des données du formulaire
+        ...item, // Garde les valeurs précédentes de l'objet item
+        image: e.target.files[0], // Attribue le premier fichier sélectionné à la propriété image
       });
     }
   };
 
-  // État pour stocker les catégories récupérées depuis l'API
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  // Utilise useEffect pour charger les catégories une fois que le composant est monté
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  // Fonction pour récupérer les catégories depuis l'API
-  const fetchCategories = async () => {
-    try {
-      // Effectue une requête GET à l'API pour obtenir les catégories
-      const response = await axios.get<Category[]>(
-        "https://localhost:5041/api/Category/GetCategories"
-      );
-      // Met à jour l'état avec les catégories récupérées depuis la réponse de l'API
-      setCategories(response.data);
-    } catch (error) {
-      // En cas d'erreur lors de la récupération des catégories, affiche une erreur dans la console
-      console.error("Error pour récupérer les catégories:", error);
-    }
-  };
-
-  // Fonction pour gérer le changement de catégorie sélectionnée par l'utilisateur
-  const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    // Met à jour l'ID de la catégorie sélectionnée dans l'état de l'objet item
-    setItem({
-      ...item,
-      categoryId: parseInt(e.target.value), // Convertit la valeur en nombre entier
-    });
-  };
-
-  const [imageURL, setImageURL] = useState('');
-
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("recipeTitle", item.recipeTitle);
     formData.append("RecipePicture", item.image as File);
@@ -136,10 +124,12 @@ const AddRecipes: React.FC = () => {
     let userId = localStorage.getItem("userId");
     let token = localStorage.getItem("accessToken");
     formData.append("userId", userId!);
-
+    
     try {
-      await axios.post(
-        "https://localhost:5041/api/Recipe/CreateRecipe",
+      // Update date to current date
+      
+      await axios.put(
+        `https://localhost:5041/api/Recipe/UpdateRecipe/${parseInt(recipeId!)}`,
         formData,
         {
           headers: {
@@ -148,13 +138,44 @@ const AddRecipes: React.FC = () => {
           },
         }
       );
-      console.log("Item created successfully");
-      window.location.href = "/dashboard";
+      console.log("Item updated successfully");
     } catch (error) {
-      console.error("Error creating item:", error);
+      console.error("Error updating item:", error);
     }
   };
 
+  const [imageURL, setImageURL] = useState("");
+
+  // État pour stocker les catégories récupérées depuis l'API
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // Utilise useEffect pour charger les catégories une fois que le composant est monté
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  // Fonction pour récupérer les catégories depuis l'API
+  const fetchCategories = async () => {
+    try {
+      // Effectue une requête GET à l'API pour obtenir les catégories
+      const response = await axios.get<Category[]>(
+        "https://localhost:5041/api/Category/GetCategories"
+      );
+      // Met à jour l'état avec les catégories récupérées depuis la réponse de l'API
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error pour récupérer les catégories:", error);
+    }
+  };
+
+  // Fonction pour gérer le changement de catégorie sélectionnée par l'utilisateur
+  const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    // Met à jour l'ID de la catégorie sélectionnée dans l'état de l'objet item
+    setItem({
+      ...item,
+      categoryId: parseInt(e.target.value), // Convertit la valeur en nombre entier
+    });
+  };
   return (
     <>
       <Header />
@@ -175,23 +196,23 @@ const AddRecipes: React.FC = () => {
 
           <br />
           <div>
-      <div className="image-recipe">
-        <label>
-          Image de la recette:
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </label>
-      </div>
-      {/* Affichage de l'image sélectionnée */}
-      {imageURL && (
-        <div className="image-preview">
-          <img src={imageURL} alt="Preview" />
-        </div>
-      )}
-    </div>
+            <div className="image-recipe">
+              <label>
+                Image de la recette:
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+            {/* Affichage de l'image sélectionnée */}
+            {imageURL && (
+              <div className="image-preview">
+                <img src={imageURL} alt="Preview" />
+              </div>
+            )}
+          </div>
           <div className="ingredients">
             <img
               src={process.env.PUBLIC_URL + "/Images/ingredient.png"}
@@ -357,12 +378,10 @@ const AddRecipes: React.FC = () => {
             </div>
           </section>
           <button name="button" className="connexion-button-form" type="submit">
-            Publier
+            Modifier
           </button>
         </form>
       </article>
     </>
   );
-};
-
-export default AddRecipes;
+};export default EditRecipe;

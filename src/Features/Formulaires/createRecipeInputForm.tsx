@@ -8,7 +8,7 @@ interface Props {
   label: string;
 }
 
-const CreateRecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
+const RecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
   return (
     <div className="create-recipe-input-container">
       <label className="create-recipe-form-label" htmlFor={label}>{label}</label>
@@ -22,4 +22,4 @@ const CreateRecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }
   );
 };
 
-export default CreateRecipeInputForm;
+export default RecipeInputForm;
