@@ -1,8 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import RecipeInputForm from "../../Features/Formulaires/createRecipeInputForm";
+import RecipeInputForm from "../../Features/Formulaires/recipeInputForm";
 import "./AddRecipes.css";
-import Header from "../../app/Layout/Header/header";
-import Aside from "../../app/Layout/Aside/aside";
 import axios from "axios";
 import { Category } from "../../Models/category";
 import { Recipe } from "../../Models/recipe";
@@ -160,7 +158,7 @@ const AddRecipes: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <h2>Ajouter une recette</h2>
           <div className="content-add-recipe-title">
-            <div className="content-add-recipe-title">
+          <div className="create-recipe-input-row input-title">
               <RecipeInputForm
                 type="text"
                 value={item.recipeTitle}
@@ -170,16 +168,15 @@ const AddRecipes: React.FC = () => {
             </div>
           </div>
           <br />
-          <div>
+          <div className="create-recipe-input-row">
+          <label>Image de la recette:</label>
+
             <div className="image-recipe">
-              <label>
-                Image de la recette:
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
             </div>
             {/* Affichage de l'image sélectionnée */}
             {imageURL && (
@@ -329,29 +326,30 @@ const AddRecipes: React.FC = () => {
                 label="Préparation n° 7"
               />
             </div>
-            <RecipeInputForm
-              type="textarea"
-              value={item.preparationN8}
-              onChange={(value) => setItem({ ...item, preparationN8: value })}
-              label="Préparation n° 8"
-            />
-
-            <div>
-              <label htmlFor="category">Catégorie :</label>
-              <select
-                id="category"
-                value={item.categoryId}
-                onChange={handleCategoryChange}
-              >
-                <option value="">Sélectionner une catégorie</option>
-                {categories.map((category) => (
-                  <option key={category.categoryId} value={category.categoryId}>
-                    {category.categoryName}
-                  </option>
-                ))}
-              </select>
+            <div className="create-recipe-input-row">
+              <RecipeInputForm
+                type="textarea"
+                value={item.preparationN8}
+                onChange={(value) => setItem({ ...item, preparationN8: value })}
+                label="Préparation n° 8"
+              />
             </div>
           </section>
+          <div className="create-recipe-input-row input-select">
+            <label htmlFor="category">Catégorie :</label>
+            <select
+              id="category"
+              value={item.categoryId}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Sélectionner une catégorie</option>
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button name="button" className="connexion-button-form" type="submit">
             Publier
           </button>

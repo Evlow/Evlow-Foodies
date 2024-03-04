@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Formulaires/inscriptionInputForm.css';
+import "./formBO.css"
 
 interface Props {
   type: "textarea" | "text"
@@ -10,7 +10,7 @@ interface Props {
 
 const RecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
   return (
-    <div className="create-recipe-input-container">
+    <>
       <label className="create-recipe-form-label" htmlFor={label}>{label}</label>
       <input 
         className="create-recipe-form-input"
@@ -18,7 +18,7 @@ const RecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-    </div>
+    </>
   );
 };
 

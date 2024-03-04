@@ -28,9 +28,8 @@ export const Router = createBrowserRouter([
       { path: "regimes-specifiques", element: <SpecificRecipes /> },
       { path: "inscription", element: <Inscription /> },
       { path: "connexion", element: <Connexion /> },
-      { path: ":recipeTitle/:recipeId", element: <RecipeSheet/> },
+      { path: ":recipeTitle/:recipeId", element: <RecipeSheet /> },
       { path: "contact", element: <Contact /> },
-
       {
         element: <Main />,
         children: [
@@ -40,7 +39,6 @@ export const Router = createBrowserRouter([
           { path: "modifier-une-recette/:recipeId", element: <EditRecipe /> },
         ],
       },
-     
     ],
   },
 ]);

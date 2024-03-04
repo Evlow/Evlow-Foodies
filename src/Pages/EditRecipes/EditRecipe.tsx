@@ -1,11 +1,13 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Header from "../../app/Layout/Header/header";
-import Aside from "../../app/Layout/Aside/aside";
-import RecipeInputForm from "../../Features/Formulaires/createRecipeInputForm";
+import RecipeInputForm from "../../Features/Formulaires/recipeInputForm";
 import { Category } from "../../Models/category";
 import { DateTime } from "luxon";
+import "../AddRecipes/AddRecipes.css";
+import "../../Features/Formulaires/formBO.css"
+
+
 
 interface Recipe {
   recipeId: number;

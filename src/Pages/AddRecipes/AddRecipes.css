@@ -13,28 +13,25 @@
   justify-content: flex-start;
 }
 
-.section-ingredients-preparations {
-  width: 45%;
-  background-color: rgba(255, 127, 80, 0.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.ingredients,
+.preparations {
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-  display: flex;
+  align-items: center;
+  font-size: 1.8em;
 }
 
-.ingredients, .preparations {
-  display: flex;
-  align-items:  center;
-  font-size: 1.8em
-}
-
-.title-preparation, .title-ingredient {
-
+.title-preparation,
+.title-ingredient {
   padding-left: 20px;
 }
 
 .image-recipe {
-  justify-content: center;
   margin-bottom: 30px;
-  text-align: center;}
+  border: 2px dashed #ff7f50;
+  padding: 20px 10px;
+  margin: 5px 0 40px 0;
+}
+.create-recipe-input-row .image-preview img {
+  height: 100px;
+  margin-bottom: 50px;
+}

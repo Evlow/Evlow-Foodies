@@ -1,0 +1,35 @@
+.section-ingredients-preparations {
+  background-color: rgba(255, 127, 80, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  max-width: 800px;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.create-recipe-input-row {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 5px;
+  gap: 5px;
+}
+
+.create-recipe-input-row.input-select {
+  width: fit-content;
+}
+
+.create-recipe-input-row.input-select select {
+border: 2px solid #FF7F50;
+background-color: white;
+padding: 5px 10px;
+border-radius: 10px;
+margin-top: 5px;}
+
+
+.create-recipe-input-row.input-title {
+width: 80%;
+margin: 0 auto;
+  }
