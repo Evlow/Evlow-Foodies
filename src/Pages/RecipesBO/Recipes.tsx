@@ -109,8 +109,6 @@ export default function Recipes() {
 
   return (
     <>
-      <Header />
-      <Aside />
       <article className="recipes">
         <section className="content-card">
           <div className="add-recipe">

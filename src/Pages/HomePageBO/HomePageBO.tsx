@@ -62,9 +62,6 @@ export default function HomePageBackOffice() {
 
   return (
     <>
-      <Header />
-      <Aside />
-
       <article className="dashboard">
         {user && (
           <>

@@ -10,11 +10,9 @@ aside {
 
 .nav-aside {
   border: none;
-  display: flex;
-  align-items: center;
   height: auto;
-  margin-top :70px;
-  justify-content: center;
+  margin-top: 70px;
+  padding: 10%;
 }
 
 .item-button-aside {
@@ -24,7 +22,7 @@ aside {
   background-color: #ffffff;
   border: none;
   border-radius: 20px;
-  width: 155px;
+  width: 100%;
   height: 85px;
   margin-bottom: 15px;
   align-items: center;

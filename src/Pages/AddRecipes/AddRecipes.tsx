@@ -107,8 +107,7 @@ const AddRecipes: React.FC = () => {
     });
   };
 
-  const [imageURL, setImageURL] = useState('');
-
+  const [imageURL, setImageURL] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -157,8 +156,6 @@ const AddRecipes: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <Aside />
       <article className="article-add-recipe">
         <form onSubmit={handleSubmit}>
           <h2>Ajouter une recette</h2>
@@ -172,26 +169,25 @@ const AddRecipes: React.FC = () => {
               />
             </div>
           </div>
-
           <br />
           <div>
-      <div className="image-recipe">
-        <label>
-          Image de la recette:
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </label>
-      </div>
-      {/* Affichage de l'image sélectionnée */}
-      {imageURL && (
-        <div className="image-preview">
-          <img src={imageURL} alt="Preview" />
-        </div>
-      )}
-    </div>
+            <div className="image-recipe">
+              <label>
+                Image de la recette:
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+            {/* Affichage de l'image sélectionnée */}
+            {imageURL && (
+              <div className="image-preview">
+                <img src={imageURL} alt="Preview" />
+              </div>
+            )}
+          </div>
           <div className="ingredients">
             <img
               src={process.env.PUBLIC_URL + "/Images/ingredient.png"}

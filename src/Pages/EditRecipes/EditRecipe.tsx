@@ -178,8 +178,6 @@ const EditRecipe: React.FC = () => {
   };
   return (
     <>
-      <Header />
-      <Aside />
       <article className="article-add-recipe">
         <form onSubmit={handleSubmit}>
           <h2>Ajouter une recette</h2>

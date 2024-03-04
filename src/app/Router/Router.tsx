@@ -13,6 +13,7 @@ import Recipes from "../../Pages/RecipesBO/Recipes";
 import RecipeSheet from "../../Pages/SheetRecipe/RecipeSheet";
 import AddRecipes from "../../Pages/AddRecipes/AddRecipes";
 import EditRecipe from "../../Pages/EditRecipes/EditRecipe";
+import Main from "../Layout/Main/Main";
 
 export const Router = createBrowserRouter([
   {
@@ -27,11 +28,19 @@ export const Router = createBrowserRouter([
       { path: "regimes-specifiques", element: <SpecificRecipes /> },
       { path: "inscription", element: <Inscription /> },
       { path: "connexion", element: <Connexion /> },
-      { path: "dashboard", element: <HomePageBackOffice /> },
-      { path: "recettes", element: <Recipes /> },
-      { path: "ajouter-une-recette", element: <AddRecipes /> },
-      { path: "modifier-une-recette/:recipeId", element: <EditRecipe/> },
-     { path: ":recipeTitle/:recipeId", element: <RecipeSheet/> }
+      { path: ":recipeTitle/:recipeId", element: <RecipeSheet/> },
+      { path: "contact", element: <Contact /> },
+
+      {
+        element: <Main />,
+        children: [
+          { path: "dashboard", element: <HomePageBackOffice /> },
+          { path: "recettes", element: <Recipes /> },
+          { path: "ajouter-une-recette", element: <AddRecipes /> },
+          { path: "modifier-une-recette/:recipeId", element: <EditRecipe /> },
+        ],
+      },
+     
     ],
   },
 ]);
