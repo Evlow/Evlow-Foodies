@@ -142,4 +142,7 @@ table {
   border-spacing: 0;
 }
 
-
+.main-front {
+  width: 80vw;
+  margin: 0 auto;    
+}
