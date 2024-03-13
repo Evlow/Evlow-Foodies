@@ -14,7 +14,6 @@ interface Recipe {
   categoryId: number;
   recipeTitle: string;
   pictureUrl: string;
-  // recipeCreatedAt: DateTime;
   recipeUpdatedAt: DateTime;
   recipeStarNote: number;
   ingredientN1: string;
@@ -42,7 +41,6 @@ const EditRecipe: React.FC = () => {
     categoryId: 0,
     recipeTitle: "",
     pictureUrl: "",
-    // recipeCreatedAt: DateTime.now(),
     recipeUpdatedAt: DateTime.now(),    
     recipeStarNote: 0,
     ingredientN1: "",
@@ -80,13 +78,11 @@ const EditRecipe: React.FC = () => {
         );
         const recipeData = response.data;
         setItem(recipeData);
+
       } catch (error) {
-        console.error("Error fetching recipe details:", error);
+        console.error("Impossible de modifier la recette", error);
       }
-
-      console.log("ma recette : ", item);
     };
-
     fetchRecipe();
   }, [recipeId]);
 
@@ -182,29 +178,25 @@ const EditRecipe: React.FC = () => {
     <>
       <article className="article-add-recipe">
         <form onSubmit={handleSubmit}>
-          <h2>Ajouter une recette</h2>
-          <div className="content-add-recipe-title">
-            <div className="content-add-recipe-title">
-              <RecipeInputForm
-                type="text"
-                value={item.recipeTitle}
-                onChange={(value) => setItem({ ...item, recipeTitle: value })}
-                label="Titre de la recette"
-              />
-            </div>
-          </div>
+        <h2 className="recipe-title">Modifier la recette</h2>
 
+          <div className="recipe-input-row input-title">
+            <RecipeInputForm
+              type="text"
+              value={item.recipeTitle}
+              onChange={(value) => setItem({ ...item, recipeTitle: value })}
+              label="Titre de la recette"
+            />
+          </div>
           <br />
-          <div>
+          <div className="recipe-input-row">
+            <label className="recipe-form-label">Image de la recette:</label>
             <div className="image-recipe">
-              <label>
-                Image de la recette:
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
             </div>
             {/* Affichage de l'image sélectionnée */}
             {imageURL && (
@@ -223,7 +215,7 @@ const EditRecipe: React.FC = () => {
             <h2 className="title-ingredient">Ingrédients</h2>
           </div>
           <section className="section-ingredients-preparations">
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN1}
@@ -231,7 +223,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 1"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN2}
@@ -239,7 +231,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 2"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN3}
@@ -247,7 +239,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 3"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN4}
@@ -255,7 +247,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 4"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN5}
@@ -263,7 +255,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 5"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN6}
@@ -271,7 +263,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 6"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN7}
@@ -279,7 +271,7 @@ const EditRecipe: React.FC = () => {
                 label="Ingrédient n° 7"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row">
               <RecipeInputForm
                 type="text"
                 value={item.ingredientN8}
@@ -298,7 +290,7 @@ const EditRecipe: React.FC = () => {
             <h2 className="title-preparation">Préparations</h2>
           </div>
           <section className="section-ingredients-preparations">
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN1}
@@ -306,7 +298,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 1"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN2}
@@ -314,7 +306,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 2"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN3}
@@ -322,7 +314,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 3"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN4}
@@ -330,7 +322,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 4"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN5}
@@ -338,7 +330,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 5"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN6}
@@ -346,7 +338,7 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 6"
               />
             </div>
-            <div className="create-recipe-input-row">
+            <div className="recipe-input-row textarea">
               <RecipeInputForm
                 type="textarea"
                 value={item.preparationN7}
@@ -354,29 +346,30 @@ const EditRecipe: React.FC = () => {
                 label="Préparation n° 7"
               />
             </div>
-            <RecipeInputForm
-              type="textarea"
-              value={item.preparationN8}
-              onChange={(value) => setItem({ ...item, preparationN8: value })}
-              label="Préparation n° 8"
-            />
-
-            <div>
-              <label htmlFor="category">Catégorie :</label>
-              <select
-                id="category"
-                value={item.categoryId}
-                onChange={handleCategoryChange}
-              >
-                <option value="">Sélectionner une catégorie</option>
-                {categories.map((category) => (
-                  <option key={category.categoryId} value={category.categoryId}>
-                    {category.categoryName}
-                  </option>
-                ))}
-              </select>
+            <div className="recipe-input-row textarea">
+              <RecipeInputForm
+                type="textarea"
+                value={item.preparationN8}
+                onChange={(value) => setItem({ ...item, preparationN8: value })}
+                label="Préparation n° 8"
+              />
             </div>
           </section>
+          <div className="recipe-input-row input-select">
+            <label htmlFor="category">Catégorie :</label>
+            <select
+              id="category"
+              value={item.categoryId}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Sélectionner une catégorie</option>
+              {categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <button name="button" className="connexion-button-form" type="submit">
             Modifier
           </button>

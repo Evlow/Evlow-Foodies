@@ -11,9 +11,9 @@ interface Props {
 const RecipeInputForm: React.FC<Props> = ({ type, value, onChange, label }) => {
   return (
     <>
-      <label className="create-recipe-form-label" htmlFor={label}>{label}</label>
+      <label className="recipe-form-label" htmlFor={label}>{label}</label>
       <input 
-        className="create-recipe-form-input"
+        className="recipe-form-input"
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
