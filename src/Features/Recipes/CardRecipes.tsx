@@ -8,8 +8,7 @@ interface Props {
 
 const CardRecipes: React.FC<Props> = ({ recipe }) => {
   return (
-    <div className='card-container'>
-      <a href={`/recipe/${recipe.recipeId}`} className="recipe-link">
+    <a href={`/recipe/${recipe.recipeId}`} className='card-container'>
         <div className="card-recipes">
           <img
             src={recipe.pictureUrl}
@@ -19,7 +18,6 @@ const CardRecipes: React.FC<Props> = ({ recipe }) => {
           <p>{recipe.recipeTitle}</p>
         </div>
       </a>
-    </div>
   );
 };
 

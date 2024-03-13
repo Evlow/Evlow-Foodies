@@ -30,10 +30,7 @@
 .container-recipes {
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: space-around;
+  gap : 10px;
 }
 
-.recipe-item {
-  width: calc(33.33% );
-  box-sizing: border-box;
-}
