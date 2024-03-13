@@ -23,7 +23,10 @@ export default function SweetRecipes() {
         imgBanner={imgRecettes}
         textBanner="Les régimes spécifiques"
       />
+            <div className="main-front">
+
       <ListRecipes recipes={recipes} />
+      </div>
       <Footer></Footer>
     </div>
   );

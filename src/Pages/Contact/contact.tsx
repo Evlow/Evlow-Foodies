@@ -43,6 +43,8 @@ export default function Contact() {
     <div className="">
       <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
+      <div className="main-front">
+
       <Descriptions
         titleDescription="Des questions ?<br/> Des suggestions ?"
         textDescription="N’hésitez pas à nous contacter !"
@@ -85,6 +87,7 @@ export default function Contact() {
         </button>
       </form>
       <div></div>
+      </div>
       <Footer></Footer>
     </div>
   );

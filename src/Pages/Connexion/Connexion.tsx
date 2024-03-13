@@ -65,6 +65,8 @@ export default function Connexion() {
     <>
     <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
+      <div className="main-front">
+
       <Descriptions
         titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
         textDescription="Rejoignez dès maintenant la communauté <br/>Evlow Foodies "
@@ -99,6 +101,7 @@ export default function Connexion() {
         </button>
         </>
       </form>
+      </div>
       <Footer></Footer>
     </>
   );

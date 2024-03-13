@@ -71,6 +71,8 @@ export default function Inscription() {
     <>
       <NavBar></NavBar>
       <Banners positionText="right" imgBanner={imgRecettes} textBanner="" />
+      <div className="main-front">
+
       <Descriptions
         titleDescription="Envie de partager vos recettes ?<br/> De retrouver vos recettes coup de coeur ?"
         textDescription="Rejoignez dès maintenant la communauté <br/>Evlow Foodies "
@@ -111,6 +113,7 @@ export default function Inscription() {
           Je m'inscris
         </button>
       </form>
+      </div>
       <Footer></Footer>
     </>
   );

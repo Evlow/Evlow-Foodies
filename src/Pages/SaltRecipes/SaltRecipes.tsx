@@ -23,7 +23,10 @@ export default function SaltRecipes() {
         imgBanner={imgRecettes}
         textBanner="Les recettes salées"
       />
+            <div className="main-front">
+
       <ListRecipes recipes={recipes} />
+      </div>
       <Footer></Footer>
     </div>
   );

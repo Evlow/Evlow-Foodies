@@ -18,13 +18,17 @@ export default function SweetRecipes() {
 
   return (
     <div className="">
-      <Navbar></Navbar>{" "}
+      <Navbar></Navbar>
+
       <Banners
         positionText="center"
         imgBanner={imgRecettes}
         textBanner="Les recettes P'tits Gônes"
       />
+            <div className="main-front">
+
       <ListRecipes recipes={recipes} />
+      </div>
       <Footer></Footer>
     </div>
   );
