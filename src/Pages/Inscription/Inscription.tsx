@@ -57,7 +57,6 @@ export default function Inscription() {
         
        // Stocker le token dans le stockage local
        localStorage.setItem("accessToken", response.data.token);
-       // localStorage.setItem("userId", response.data.user.userId.toString());
 
        // Rediriger vers la page d'accueil après la connexion réussie
        navigate("/connexion");

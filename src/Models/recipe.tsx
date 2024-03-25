@@ -15,4 +15,13 @@ export interface Recipe {
   ingredientN6: string;
   ingredientN7: string;
   ingredientN8: string;
+  preparationN1: string;
+  preparationN2: string;
+  preparationN3: string;
+  preparationN4: string;
+  preparationN5: string;
+  preparationN6: string;
+  preparationN7: string;
+  preparationN8: string;
+
 }

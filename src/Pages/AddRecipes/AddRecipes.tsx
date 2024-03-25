@@ -104,13 +104,14 @@ const AddRecipes: React.FC = () => {
       categoryId: parseInt(e.target.value), // Convertit la valeur en nombre entier
     });
   };
-
+  // Déclaration d'un état pour stocker l'URL de l'image
   const [imageURL, setImageURL] = useState("");
-
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+    // Création d'un objet FormData pour envoyer les données du formulaire
     const formData = new FormData();
+    // Ajout des différentes données du formulaire au formData
     formData.append("recipeTitle", item.recipeTitle);
     formData.append("RecipePicture", item.image as File);
     formData.append("categoryId", item.categoryId.toString());
@@ -130,17 +131,22 @@ const AddRecipes: React.FC = () => {
     formData.append("preparationN6", item.preparationN6);
     formData.append("preparationN7", item.preparationN7);
     formData.append("preparationN8", item.preparationN8);
+    // Récupération de l'Id de l'utilisateur à partir du stockage local
     let userId = localStorage.getItem("userId");
     let token = localStorage.getItem("accessToken");
+    // Ajout de l'Id de l'utilisateur au formData
     formData.append("userId", userId!);
 
     try {
+      // Envoi de la requête POST pour créer une recette
       await axios.post(
         "https://localhost:5041/api/Recipe/CreateRecipe",
         formData,
         {
           headers: {
+            // Type de contenu pour les données du formulaire
             "Content-Type": "multipart/form-data",
+            // Ajout du jeton d'authentification dans l'en-tête
             Authorization: `Bearer ${token}`,
           },
         }
@@ -156,7 +162,7 @@ const AddRecipes: React.FC = () => {
     <>
       <article className="article-add-recipe">
         <form onSubmit={handleSubmit}>
-        <h2 className="recipe-title">Ajouter une recette</h2>
+          <h2 className="recipe-title">Ajouter une recette</h2>
 
           <div className="recipe-input-row input-title">
             <RecipeInputForm

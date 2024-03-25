@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Recipe } from "../../Models/recipe";
@@ -16,7 +16,7 @@ export default function RecipeSheet() {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:5041/api/Recipe/RecipeId/${parseInt(recipeId!)}`
+          `https://localhost:5041/api/Recipe/GetRecipeByRecipeId/${parseInt(recipeId!)}`
         );
         setRecipe(response.data);
       } catch (error) {
@@ -50,8 +50,40 @@ export default function RecipeSheet() {
                   Ingrédients
                 </h4>
               </div>
+              <div>
+                <p>Étape n°1</p>
+                <p>{recipe?.ingredientN1}</p>
+              </div>
+              <div>
+                <p>Étape n°2</p>
+                <p>{recipe?.ingredientN2}</p>
+              </div>
+              <div>
+                <p>Étape n°3</p>
+                <p>{recipe?.ingredientN3}</p>
+              </div>
+              <div>
+                <p>Étape n°4</p>
+                <p>{recipe?.ingredientN4}</p>
+              </div>
+              <div>
+                <p>Étape n°5</p>
+                <p>{recipe?.ingredientN5}</p>
+              </div>
+              <div>
+                <p>Étape n°6</p>
+                <p>{recipe?.ingredientN6}</p>
+              </div>
+              <div>
+                <p>Étape n°7</p>
+                <p>{recipe?.ingredientN7}</p>
+              </div>
+              <div>
+                <p>Étape n°8</p>
+                <p>{recipe?.ingredientN8}</p>
+              </div>
             </section>
-            <section className="section-preparations">
+            <section className="section-ingredients">
               <div className="bloc-title">
                 <h4 className="sheet-recipe-h4">
                   <img src={iconPreparation} />
@@ -59,8 +91,36 @@ export default function RecipeSheet() {
                 </h4>
               </div>
               <div>
-                <p>Étape n°1</p>
-                <p>{recipe?.ingredientN1}</p>
+                <p>Préparation n°1</p>
+                <p>{recipe?.preparationN1}</p>
+              </div>
+              <div>
+                <p>Préparation n°2</p>
+                <p>{recipe?.preparationN2}</p>
+              </div>
+              <div>
+                <p>Préparation n°3</p>
+                <p>{recipe?.preparationN3}</p>
+              </div>
+              <div>
+                <p>Préparation n°4</p>
+                <p>{recipe?.preparationN4}</p>
+              </div>
+              <div>
+                <p>Préparation n°5</p>
+                <p>{recipe?.preparationN5}</p>
+              </div>
+              <div>
+                <p>Préparation n°6</p>
+                <p>{recipe?.preparationN6}</p>
+              </div>
+              <div>
+                <p>Préparation n°7</p>
+                <p>{recipe?.preparationN7}</p>
+              </div>
+              <div>
+                <p>Préparation n°8</p>
+                <p>{recipe?.preparationN8}</p>
               </div>
             </section>
           </article>

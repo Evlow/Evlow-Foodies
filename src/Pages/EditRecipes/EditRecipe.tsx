@@ -69,7 +69,7 @@ const EditRecipe: React.FC = () => {
       try {
         let token = localStorage.getItem("accessToken");
         const response = await axios.get<Recipe>(
-          `https://localhost:5041/api/Recipe/RecipeId/${parseInt(recipeId!)}`,
+          `https://localhost:5041/api/Recipe/GetRecipeByRecipeId/${parseInt(recipeId!)}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -123,9 +123,7 @@ const EditRecipe: React.FC = () => {
     let token = localStorage.getItem("accessToken");
     formData.append("userId", userId!);
     
-    try {
-      // Update date to current date
-      
+    try {      
       await axios.put(
         `https://localhost:5041/api/Recipe/UpdateRecipe/${parseInt(recipeId!)}`,
         formData,
@@ -136,9 +134,9 @@ const EditRecipe: React.FC = () => {
           },
         }
       );
-      console.log("Item updated successfully");
+      console.log("Modification de la recette effectuée avec succèes");
     } catch (error) {
-      console.error("Error updating item:", error);
+      console.error("Erreur modification de la recette:", error);
     }
   };
 

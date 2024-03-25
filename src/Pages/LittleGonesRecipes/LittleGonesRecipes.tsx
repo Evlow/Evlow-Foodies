@@ -25,9 +25,8 @@ export default function SweetRecipes() {
         imgBanner={imgRecettes}
         textBanner="Les recettes P'tits Gônes"
       />
-            <div className="main-front">
-
-      <ListRecipes recipes={recipes} />
+      <div className="main-front">
+        <ListRecipes recipes={recipes} />
       </div>
       <Footer></Footer>
     </div>
